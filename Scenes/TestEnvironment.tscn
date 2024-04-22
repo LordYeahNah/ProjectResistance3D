@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=3 uid="uid://d3op8kuajg1yq"]
+
+[ext_resource type="Texture2D" uid="uid://qruc0poge1rq" path="res://Textures/GridWhite.png" id="1_uvwl8"]
+[ext_resource type="PackedScene" uid="uid://csx2j5nue1pgq" path="res://Prefabs/CharacterPF.tscn" id="2_12ykx"]
+[ext_resource type="Script" path="res://Scripts/Characters/CharacterController.cs" id="3_nl0d1"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_tj6wu"]
+vertices = PackedVector3Array(-21.9246, 0.5, -19.708, -21.9246, 0.5, 19.792, 21.8254, 0.5, 19.792, 21.8254, 0.5, -19.708)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3yvx7"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_x0ofh"]
+albedo_texture = ExtResource("1_uvwl8")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rsrio"]
+
+[sub_resource type="Sky" id="Sky_3agig"]
+sky_material = SubResource("ProceduralSkyMaterial_rsrio")
+
+[sub_resource type="Environment" id="Environment_plhjg"]
+background_mode = 2
+sky = SubResource("Sky_3agig")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_tj6wu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(22.4246, 0, 0, 0, 1, 0, 0, 0, 20.208, 0, 0, 0)
+mesh = SubResource("PlaneMesh_3yvx7")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ORMMaterial3D_x0ofh")
+
+[node name="CharacterBody3D" parent="." node_paths=PackedStringArray("_debugPosition") instance=ExtResource("2_12ykx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.97605, 0, 9.90857)
+script = ExtResource("3_nl0d1")
+_debugPosition = NodePath("../Node3D")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.03798, 0, -8.73276)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.484993, 0, 0.874518, 0, 1, 0, -0.874518, 0, -0.484993, 12.6835, 4.90423, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_plhjg")

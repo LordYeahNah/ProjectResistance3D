@@ -40,6 +40,8 @@ public partial class CharacterController : CharacterBody3D
         _agent = GetNode<NavigationAgent3D>("NavAgent");
         if(_agent == null)
             GD.PrintErr("CharacterController -> Failed to get reference to the navigation agent");
+        
+        Callable.From(ActorSetup).CallDeferred();
     }
 
     public override void _PhysicsProcess(double delta)
@@ -56,7 +58,7 @@ public partial class CharacterController : CharacterBody3D
             return;
 
         Vector3 currentPos = GlobalTransform.Origin;
-        Vector3 nextPathPosition = _agent.GetNextPathPosition();
+        Vector3 nextPathPosition = _agent.GetNextPathPosition() * _generalMovementSpeed;
 
         Velocity = currentPos.DirectionTo(nextPathPosition);
         MoveAndSlide();
