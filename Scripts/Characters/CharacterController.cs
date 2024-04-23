@@ -66,6 +66,9 @@ public partial class CharacterController : CharacterBody3D
         base._Process(dt);
         if(_stateMachine != null)
             _stateMachine.OnUpdate((float)dt);
+        
+        if(_anim != null)
+            _anim.OnUpdate((float)dt);
     }
 
     public override void _PhysicsProcess(double delta)
