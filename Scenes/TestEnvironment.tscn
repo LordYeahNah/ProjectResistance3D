@@ -103,12 +103,13 @@ surface_material_override/0 = SubResource("ORMMaterial3D_1gghp")
 [node name="CharacterBody3D" parent="." instance=ExtResource("2_12ykx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.97605, 0, 9.90857)
 _generalMovementSpeed = 3.0
+_rotationSpeed = 75.0
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.03798, 0, -8.73276)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.484993, 0, 0.874518, 0, 1, 0, -0.874518, 0, -0.484993, 12.6835, 4.90423, 0)
+transform = Transform3D(-0.484993, 0, 0.874518, 0, 1, 0, -0.874518, 0, -0.484993, 19.2984, 7.58471, -8.61261)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_plhjg")

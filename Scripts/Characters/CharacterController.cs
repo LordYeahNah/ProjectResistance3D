@@ -9,6 +9,10 @@ public partial class CharacterController : CharacterBody3D
     private float _partolMovementSpeed;
     [Export]
     private float _generalMovementSpeed;
+    
+    // === Rotation Settings === //
+    [Export]
+    private float _rotationSpeed;
 
     private bool _hasMoveToLocation = false;
     private Vector3 _moveToLocation;
@@ -56,20 +60,27 @@ public partial class CharacterController : CharacterBody3D
     {
         base._PhysicsProcess(delta);
         
-        HandleMovement();
+        HandleMovement((float)delta);
         
     }
 
-    private void HandleMovement()
+    private void HandleMovement(float dt)
     {
         if (!_hasMoveToLocation || _agent == null || _agent.IsNavigationFinished())
             return;
 
-        Vector3 currentPos = GlobalTransform.Origin;
-        Vector3 nextPathPosition = _agent.GetNextPathPosition();
+        var currentPos = GlobalTransform.Origin;
+        var nextPathPosition = _agent.GetNextPathPosition();
 
         Velocity = currentPos.DirectionTo(nextPathPosition) * _generalMovementSpeed;
         MoveAndSlide();
+
+        if (Velocity.Length() > 0f)
+        {
+            var angle = Mathf.Atan2(-Velocity.Z, Velocity.X);
+            var targetRotation = new Quaternion(Vector3.Up, angle).Normalized();
+            this.Rotation = Quaternion.Slerp(targetRotation, dt * _rotationSpeed).GetEuler();
+        }
     }
 
     /// <summary>
