@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://csx2j5nue1pgq"]
+[gd_scene load_steps=7 format=3 uid="uid://csx2j5nue1pgq"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/CharacterController.cs" id="1_ohvve"]
+[ext_resource type="Texture2D" uid="uid://qruc0poge1rq" path="res://Textures/GridWhite.png" id="2_wl04i"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_85b2q"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_0t473"]
+albedo_color = Color(0.878399, 0.14841, 4.81307e-07, 1)
+albedo_texture = ExtResource("2_wl04i")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_ritp1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dwjtx"]
 
@@ -12,6 +20,11 @@ script = ExtResource("1_ohvve")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_85b2q")
+surface_material_override/0 = SubResource("ORMMaterial3D_0t473")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.544019, 0, 0, 0, 0.236451, 0, 0, 0, 0.685023, 0.326224, 0.457335, 0)
+mesh = SubResource("BoxMesh_ritp1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
