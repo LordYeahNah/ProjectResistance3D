@@ -10,9 +10,6 @@ public partial class CharacterController : CharacterBody3D
     [Export]
     private float _generalMovementSpeed;
 
-    [Export]
-    private Node3D _debugPosition;
-
     private bool _hasMoveToLocation = false;
     private Vector3 _moveToLocation;
 
@@ -29,9 +26,13 @@ public partial class CharacterController : CharacterBody3D
             }
         }
     }
-    
-    // === Components === //
+    // == AI == //
     private NavigationAgent3D _agent;
+    public NavigationAgent3D Agent => _agent;
+    private StateMachine _stateMachine;
+    public StateMachine StateMachineRef => _stateMachine;
+    
+    
     
 
     public override void _Ready()
@@ -40,8 +41,15 @@ public partial class CharacterController : CharacterBody3D
         _agent = GetNode<NavigationAgent3D>("NavAgent");
         if(_agent == null)
             GD.PrintErr("CharacterController -> Failed to get reference to the navigation agent");
-        
+
         Callable.From(ActorSetup).CallDeferred();
+    }
+
+    public override void _Process(double dt)
+    {
+        base._Process(dt);
+        if(_stateMachine != null)
+            _stateMachine.OnUpdate((float)dt);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -58,9 +66,9 @@ public partial class CharacterController : CharacterBody3D
             return;
 
         Vector3 currentPos = GlobalTransform.Origin;
-        Vector3 nextPathPosition = _agent.GetNextPathPosition() * _generalMovementSpeed;
+        Vector3 nextPathPosition = _agent.GetNextPathPosition();
 
-        Velocity = currentPos.DirectionTo(nextPathPosition);
+        Velocity = currentPos.DirectionTo(nextPathPosition) * _generalMovementSpeed;
         MoveAndSlide();
     }
 
@@ -77,6 +85,12 @@ public partial class CharacterController : CharacterBody3D
     public async void ActorSetup()
     {
         await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
-        SetMoveToLocation(_debugPosition.Position);
+        CreateStateMachine();
+    }
+
+    protected virtual void CreateStateMachine()
+    {
+        _stateMachine = new WanderStateMachine();
+        _stateMachine.OnStart(this);
     }
 }

@@ -4,7 +4,7 @@ using NexusExtensions;
 
 public class MoveToLocationState : State
 {
-    private readonly float STOPPING_DISTANCE = 0.6f;
+    private readonly float STOPPING_DISTANCE = 3f;
     
     private CharacterController _ctrl;
     public MoveToLocationState(StateMachine stateMach, bool hasExit = false, bool loop = false) : base(stateMach, hasExit, loop)

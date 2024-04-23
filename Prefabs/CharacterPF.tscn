@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://csx2j5nue1pgq"]
+[gd_scene load_steps=4 format=3 uid="uid://csx2j5nue1pgq"]
+
+[ext_resource type="Script" path="res://Scripts/Characters/CharacterController.cs" id="1_ohvve"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_85b2q"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dwjtx"]
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_ohvve")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
