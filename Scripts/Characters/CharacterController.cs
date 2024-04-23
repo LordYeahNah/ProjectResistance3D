@@ -5,14 +5,11 @@ using NexusExtensions;
 public partial class CharacterController : CharacterBody3D
 {
     // === Movement Settings === //
-    [Export]
-    private float _partolMovementSpeed;
-    [Export]
-    private float _generalMovementSpeed;
+    [Export] private float _partolMovementSpeed;
+    [Export] private float _generalMovementSpeed;
     
     // === Rotation Settings === //
-    [Export]
-    private float _rotationSpeed;
+    [Export] private float _rotationSpeed;
     
     // === Animation settings === //
     protected AnimationPlayer _animPlayer;
@@ -41,7 +38,10 @@ public partial class CharacterController : CharacterBody3D
     private StateMachine _stateMachine;
     public StateMachine StateMachineRef => _stateMachine;
     
-    
+    // === Follow Path Settings === //
+    [ExportGroup("Follow Path Settings")]
+    [Export] private PathPointController _followPathController;                         // reference to the path the character is following
+    public PathPointController FollowPathController => _followPathController;
     
 
     public override void _Ready()
