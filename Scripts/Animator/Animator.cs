@@ -11,8 +11,9 @@ public class Animator : StateMachine
     public override void OnStart(CharacterController ctrl)
     {
         _animPlayer = ctrl.AnimPlayer;
-        base.OnStart(ctrl);
         CreateAnimator();
+        base.OnStart(ctrl);
+        
     }
 
     public void PlayAnimation(string animName)
@@ -37,6 +38,8 @@ public class Animator : StateMachine
 
     protected virtual void CreateAnimator()
     {
+        SetStateProperty("IsMoving", false, EPropertyType.PROP_Bool);
+        
         var idleAnim = new Animation(this, "Idle_Unarmed_01", 8.35f, false, true);
         var walkAnim = new Animation(this, "Walk_Unarmed_01", 1.0333f, false, true);
 

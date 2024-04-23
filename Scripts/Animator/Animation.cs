@@ -22,11 +22,32 @@ public class Animation : State
         {
             _animOwner = (Animator)_stateMachine;
         }
+
+        _animationName = animName;
+        _animationLength = length;
     }
 
     public Animation(StateMachine stateMach, SubStateMachine subState, string animName, float length, bool hasExit = false, bool loop = false) : base(stateMach, subState, hasExit, loop)
     {
-        _animOwner = (Animator)_stateMachine;
+        if (_stateMachine is Animator)
+        {
+            _animOwner = (Animator)_stateMachine;
+        }
+
+        _animationName = animName;
+        _animationLength = length;
+    }
+
+    public override void OnEnter()
+    {
+        if (_animOwner != null)
+        {
+            _animOwner.PlayAnimation(_animationName);
+        }
+        else
+        {
+            GD.PrintErr("Animation -> Animator is not referenced");
+        }
     }
 
     public override void OnUpdate(float dt)
