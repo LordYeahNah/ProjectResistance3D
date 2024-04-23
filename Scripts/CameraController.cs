@@ -8,6 +8,9 @@ public partial class CameraController : Node3D
     [Export]
     private float _movementSpeed;                   // Speed the camera will move at
 
+    [Export]
+    private float _rotationSpeed;                   // Speed the character will rotate at
+
     public override void _Ready()
     {
         base._Ready();
@@ -20,6 +23,7 @@ public partial class CameraController : Node3D
     {
         base._Process(dt);
         HandleCameraMovement((float)dt);
+        RotateCamera((float)dt);
     }
 
     private void HandleCameraMovement(float dt)
@@ -32,5 +36,13 @@ public partial class CameraController : Node3D
 
             this.Position += (forward + right);
         }
+    }
+
+    private void RotateCamera(float dt)
+    {
+        var input = Input.GetActionStrength("RotateRight") - Input.GetActionStrength("RotateLeft");
+        var rotRate = input * _rotationSpeed * dt;
+        
+        RotateY(rotRate);
     }
 }
