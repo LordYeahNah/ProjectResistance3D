@@ -37,6 +37,14 @@ public class Animation : State
             OnFinish();
     }
 
+    public override void OnFinish()
+    {
+        base.OnFinish();
+        
+        if (Loop)
+            _currentAnimTime = 0f;
+    }
+
     public override void OnExit()
     {
         _currentAnimTime = 0f;
