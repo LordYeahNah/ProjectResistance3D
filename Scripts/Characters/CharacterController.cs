@@ -13,6 +13,10 @@ public partial class CharacterController : CharacterBody3D
     // === Rotation Settings === //
     [Export]
     private float _rotationSpeed;
+    
+    // === Animation settings === //
+    protected AnimationPlayer _animPlayer;
+    public AnimationPlayer AnimPlayer => _animPlayer;
 
     private bool _hasMoveToLocation = false;
     private Vector3 _moveToLocation;
@@ -45,6 +49,10 @@ public partial class CharacterController : CharacterBody3D
         _agent = GetNode<NavigationAgent3D>("NavAgent");
         if(_agent == null)
             GD.PrintErr("CharacterController -> Failed to get reference to the navigation agent");
+
+        _animPlayer = GetNode<AnimationPlayer>("Character/AnimationPlayer");
+        if(_animPlayer == null)
+            GD.PrintErr("CharacterController -> Failed to get reference to the animation player");
 
         Callable.From(ActorSetup).CallDeferred();
     }
