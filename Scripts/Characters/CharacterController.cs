@@ -17,6 +17,7 @@ public partial class CharacterController : CharacterBody3D
     // === Animation settings === //
     protected AnimationPlayer _animPlayer;
     public AnimationPlayer AnimPlayer => _animPlayer;
+    protected Animator _anim;                   // Reference to the animator
 
     private bool _hasMoveToLocation = false;
     private Vector3 _moveToLocation;
@@ -53,6 +54,9 @@ public partial class CharacterController : CharacterBody3D
         _animPlayer = GetNode<AnimationPlayer>("Character/AnimationPlayer");
         if(_animPlayer == null)
             GD.PrintErr("CharacterController -> Failed to get reference to the animation player");
+
+        _anim = new Animator();
+        _anim.OnStart(this);
 
         Callable.From(ActorSetup).CallDeferred();
     }
@@ -99,6 +103,9 @@ public partial class CharacterController : CharacterBody3D
     {
         MoveToLocation = moveTo;
         _hasMoveToLocation = moveTo != Vector3.Zero;
+        // Setup the animator
+        if(_anim != null)
+            _anim.SetStateProperty("IsMoving", _hasMoveToLocation);
     }
 
     public async void ActorSetup()
