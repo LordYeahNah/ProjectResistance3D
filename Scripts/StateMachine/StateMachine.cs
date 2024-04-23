@@ -12,7 +12,9 @@ public class StateMachine
     public List<StateProperty> Properties => _properties;
     private State _currentState;                    // Reference to the current state updating
     public State EntryState;                            // Which state will start the state machine
-    
+
+    public List<StateUpdater> AllStateUpdaters = new List<StateUpdater>();
+    private List<StateUpdater> _activeStateUpdaters = new List<StateUpdater>();
 
     public virtual void OnStart(CharacterController ctrl)
     {
@@ -24,11 +26,19 @@ public class StateMachine
     public virtual void OnUpdate(float dt)
     {
         _currentState?.OnUpdate(dt);                    // Update the state
+        
+        CheckStateUpdaters();
+        
+        foreach(var updater in _activeStateUpdaters)
+            if(updater != null)
+                updater.OnUpdate((float)dt);
 
         // check if there is any possible transitions
         State state = CheckForTransition();
         if(state != null)
             SetState(state);
+        
+        
     }
 
     private State CheckForTransition()
@@ -41,6 +51,33 @@ public class StateMachine
 
         return null;
     }
+
+    /// <summary>
+    /// Checks if there should be 
+    /// </summary>
+    private void CheckStateUpdaters()
+    {
+        foreach (var state in AllStateUpdaters)
+        {
+            if (_activeStateUpdaters.Contains(state))
+            {
+                if (_currentState != state.StateRef)
+                {
+                    state.OnExit();
+                    _activeStateUpdaters.Remove(state);
+                }
+            }
+            else
+            {
+                if (state.StateRef == _currentState)
+                {
+                    state.OnEnter();
+                    _activeStateUpdaters.Add(state);
+                }
+            }
+        }
+    }
+    
     
     /// <summary>
     /// Sets the new state to transition to
