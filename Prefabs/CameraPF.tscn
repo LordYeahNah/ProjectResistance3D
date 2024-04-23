@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://duh065j5srnj8"]
+
+[ext_resource type="Script" path="res://Scripts/CameraController.cs" id="1_3jea6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3iji1"]
+
+[node name="CameraController" type="Node3D"]
+script = ExtResource("1_3jea6")
+_movementSpeed = 5.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.00915355, -0.508275, 0.861146, -0.00540241, 0.861195, 0.508246, -0.999943, 0, -0.0106289, 2.93377, 3.23821, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_3iji1")

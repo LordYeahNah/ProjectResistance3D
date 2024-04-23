@@ -5,6 +5,9 @@ public partial class CameraController : Node3D
 {
     private Camera3D _camRef;                       // Store reference to the camera
 
+    [Export]
+    private float _movementSpeed;                   // Speed the camera will move at
+
     public override void _Ready()
     {
         base._Ready();
@@ -16,11 +19,18 @@ public partial class CameraController : Node3D
     public override void _Process(double dt)
     {
         base._Process(dt);
-        HandleCameraMovement();
+        HandleCameraMovement((float)dt);
     }
 
-    private void HandleCameraMovement()
+    private void HandleCameraMovement(float dt)
     {
-        
+        var inputValue = Input.GetVector("MoveRight", "MoveLeft", "MoveForward", "MoveBack");
+        if (inputValue.Length() > 0.1f)
+        {
+            var forward = Transform.Basis.X * (inputValue.Y * (_movementSpeed * dt));
+            var right = Transform.Basis.Z * (inputValue.X * (_movementSpeed * dt));
+
+            this.Position += (forward + right);
+        }
     }
 }
