@@ -12,6 +12,7 @@ public class Animator : StateMachine
     {
         _animPlayer = ctrl.AnimPlayer;
         base.OnStart(ctrl);
+        CreateAnimator();
     }
 
     public void PlayAnimation(string animName)
@@ -32,5 +33,29 @@ public class Animator : StateMachine
         _animations.Add(anim);
         if (entry)
             EntryState = anim;
+    }
+
+    protected virtual void CreateAnimator()
+    {
+        var idleAnim = new Animation(this, "Idle_Unarmed_01", 8.35f, false, true);
+        var walkAnim = new Animation(this, "Walk_Unarmed_01", 1.0333f, false, true);
+
+        var idleToWalk = new StateTransition
+        {
+            NextState = walkAnim
+        };
+        idleToWalk._requiredProps.Add(new StateValue<bool>("IsMoving", true, EPropertyType.PROP_Bool));
+        idleAnim.Transitions.Add(idleToWalk);
+
+        var walkToIdle = new StateTransition()
+        {
+            NextState = idleAnim
+        };
+        walkToIdle._requiredProps.Add(new StateValue<bool>("IsMoving", false, EPropertyType.PROP_Bool));
+        walkAnim.Transitions.Add(walkToIdle);
+        
+        AddAnimation(idleAnim, true);
+        AddAnimation(walkAnim);
+        
     }
 }
