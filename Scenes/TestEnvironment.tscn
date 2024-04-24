@@ -65,7 +65,6 @@ surface_material_override/0 = SubResource("ORMMaterial3D_m86vg")
 transform = Transform3D(1.00704, 0, 0, 0, 1.00704, 0, 0, 0, 1.00704, 6.97605, 0, 9.90857)
 _generalMovementSpeed = 2.0
 _rotationSpeed = 5.0
-_followPathPoint = true
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.03798, 0, -8.73276)

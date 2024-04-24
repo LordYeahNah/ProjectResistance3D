@@ -29,9 +29,17 @@ public class UnarmedSubAnim : AnimatorSubState
         };
         walkToIdle._requiredProps.Add(new StateValue<bool>("IsMoving", false, EPropertyType.PROP_Bool));
         walkAnim.Transitions.Add(walkToIdle);
+
+        var testEvent = new AnimationEvent(TestAnimEvent, 4.3f);
+        idleAnim.AnimEvents.Add(testEvent);
         
         EntryState = idleAnim;
         Animations.Add(idleAnim);
         Animations.Add(walkAnim);
+    }
+
+    private void TestAnimEvent()
+    {
+        GD.Print("Event Fired");
     }
 }
