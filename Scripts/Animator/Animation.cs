@@ -15,6 +15,9 @@ public class Animation : State
     // === Animation Updates === //
     protected float _currentAnimTime;
     
+    // === Animation Events === //
+    public List<AnimationEvent> AnimEvents = new List<AnimationEvent>();
+    
     
     public Animation(StateMachine stateMach, string animName, float length, bool hasExit = false, bool loop = false) : base(stateMach, hasExit, loop)
     {
@@ -57,6 +60,16 @@ public class Animation : State
     {
         base.OnUpdate(dt);
         _currentAnimTime += 1 * dt;
+
+        // Check if any events are due to be fired
+        foreach (var e in AnimEvents)
+        {
+            if (_currentAnimTime > e.EventTime && !e.HasFired)
+            {
+                e.FireEvent();
+            }
+        }
+        
         if (_currentAnimTime > _animationLength)
             OnFinish();
     }
@@ -64,6 +77,10 @@ public class Animation : State
     public override void OnFinish()
     {
         base.OnFinish();
+    
+        // reset the events so when fire them again
+        foreach (var e in AnimEvents)
+            e?.OnFinish();
         
         if (Loop)
             _currentAnimTime = 0f;

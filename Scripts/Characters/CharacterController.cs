@@ -72,8 +72,8 @@ public partial class CharacterController : CharacterBody3D
         set
         {
             _armedState = value;
-            if(_stateMachine != null)
-                _stateMachine.SetStateProperty(GeneralAnimKeys.ARMED_STATE, (int)value, EPropertyType.PROP_Int);
+            if(_anim != null)
+                _anim.SetStateProperty(GeneralAnimKeys.ARMED_STATE, (int)value, EPropertyType.PROP_Int);
         }
     }
     
@@ -120,10 +120,7 @@ public partial class CharacterController : CharacterBody3D
 
         if (Input.IsActionJustPressed("TestInput"))
         {
-            if (ArmedState == EArmedState.ARMED_Unarmed)
-                ArmedState = EArmedState.ARMED_Rifle;
-            else
-                ArmedState = EArmedState.ARMED_Unarmed;
+            ArmedState = ArmedState == EArmedState.ARMED_Unarmed ? EArmedState.ARMED_Rifle : EArmedState.ARMED_Unarmed;
         }
     }
 
