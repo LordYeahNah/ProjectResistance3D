@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Intrinsics.Arm;
 using Godot;
+using Newtonsoft.Json;
 
 public enum EWeaponType
 {
@@ -14,9 +15,7 @@ public class WeaponDetails
 {
     // === Weapon Details === //
     // Store reference to the weapon ID
-    protected string _weaponID;
-    public string WeaponID => _weaponID;
-
+    public readonly string WEAPON_ID;
     public string WeaponName;                           // Name of the weapon     
     public EWeaponType WeaponType;                          // Type of the weapon
 
@@ -25,11 +24,25 @@ public class WeaponDetails
     protected float _criticalHitChance;
     protected float _criticalHitModifier;
     protected float _weaponCooldown;                    // How long before the weapon can be used again
+    public float WeaponCooldown => _weaponCooldown;
 
     // === Ammo Settings === //
     protected int _maxAmmoInMag;
     public int MaxAmmoInMag => _maxAmmoInMag;
 
+    public WeaponDetails(JsonWeapon weapon)
+    {
+        WEAPON_ID = weapon.WeaponID;
+        WeaponName = weapon.WeaponName;
+        WeaponType = (EWeaponType)weapon.WeaponType;
+
+        _damagePoints = weapon.DamagePoints;
+        _criticalHitChance = weapon.CriticalHitChance;
+        _criticalHitModifier = weapon.CriticalHitModifier;
+        _weaponCooldown = weapon.WeaponCooldown;
+
+        _maxAmmoInMag = weapon.AmmoInMag;
+    }
 
     /// <summary>
     /// Calculates the damage points
@@ -76,4 +89,24 @@ public class WeaponDetails
 
         return dp;
     }
+}
+
+public class JsonWeapon
+{
+    [JsonProperty]
+    public string WeaponID;
+    [JsonProperty]
+    public string WeaponName;
+    [JsonProperty]
+    public int WeaponType;
+    [JsonProperty]
+    public float DamagePoints;
+    [JsonProperty]
+    public float CriticalHitChance;
+    [JsonProperty]
+    public float CriticalHitModifier;
+    [JsonProperty]
+    public float WeaponCooldown;
+    [JsonProperty]
+    public int AmmoInMag;
 }
