@@ -40,13 +40,16 @@ public class Animation : State
 
     public override void OnEnter()
     {
-        if (_animOwner != null)
+        if (IS_OWNED_BY_SUBSTATE)
         {
-            _animOwner.PlayAnimation(_animationName);
+            if (_subState is AnimatorSubState subState)
+            {
+                subState.PlayAnimation(AnimationName);
+            }
         }
         else
         {
-            GD.PrintErr("Animation -> Animator is not referenced");
+            _animOwner?.PlayAnimation(AnimationName);
         }
     }
 

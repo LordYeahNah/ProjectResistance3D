@@ -2,6 +2,12 @@ using Godot;
 using NexusExtensions;
 using NexusExtensions.Animation;
 
+public enum EArmedState
+{
+    ARMED_Unarmed = 0,
+    ARMED_Rifle = 1,
+}
+
 public partial class CharacterController : CharacterBody3D
 {
     // === Movement Settings === //
@@ -58,6 +64,19 @@ public partial class CharacterController : CharacterBody3D
         }
     } 
     
+    // === States === //
+    private EArmedState _armedState;
+    public EArmedState ArmedState
+    {
+        get => _armedState;
+        set
+        {
+            _armedState = value;
+            if(_stateMachine != null)
+                _stateMachine.SetStateProperty(GeneralAnimKeys.ARMED_STATE, (int)value, EPropertyType.PROP_Int);
+        }
+    }
+    
 
     public override void _Ready()
     {
@@ -73,7 +92,7 @@ public partial class CharacterController : CharacterBody3D
             GD.PrintErr("CharacterController -> Failed to get reference to the animation player");
 
         // Create and start the new animator
-        _anim = new Animator();
+        _anim = new GeneralAnimator();
         _anim.OnStart(this);
 
         FindRandomPathPointInWorld();                       // Finds a path point to follow
@@ -98,6 +117,14 @@ public partial class CharacterController : CharacterBody3D
         base._PhysicsProcess(delta);
         
         HandleMovement((float)delta);                   // Handle movement
+
+        if (Input.IsActionJustPressed("TestInput"))
+        {
+            if (ArmedState == EArmedState.ARMED_Unarmed)
+                ArmedState = EArmedState.ARMED_Rifle;
+            else
+                ArmedState = EArmedState.ARMED_Unarmed;
+        }
     }
 
     /// <summary>
@@ -136,7 +163,7 @@ public partial class CharacterController : CharacterBody3D
         
         // update the animator if we are moving or not
         if(_anim != null)
-            _anim.SetStateProperty("IsMoving", _hasMoveToLocation);
+            _anim.SetStateProperty(GeneralAnimKeys.IS_MOVING, _hasMoveToLocation);
     }
 
     public async void ActorSetup()
@@ -187,7 +214,7 @@ public partial class CharacterController : CharacterBody3D
                 for (int i = 0; i < 50; i++)
                 {
                     rand.Randomize();
-                    var pointIndex = rand.RandiRange(0, pathPoints.Count);                  // Determine the path index
+                    var pointIndex = rand.RandiRange(0, pathPoints.Count - 1);                  // Determine the path index
                     var pathPoint = (PathPointController)pathPoints[pointIndex];                // Get reference to the path point
                     // Make sure the path isn't null
                     if (pathPoint != null)

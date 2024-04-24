@@ -62,7 +62,7 @@ mesh = SubResource("BoxMesh_rsodl")
 surface_material_override/0 = SubResource("ORMMaterial3D_m86vg")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("2_12ykx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.97605, 0, 9.90857)
+transform = Transform3D(1.00704, 0, 0, 0, 1.00704, 0, 0, 0, 1.00704, 6.97605, 0, 9.90857)
 _generalMovementSpeed = 2.0
 _rotationSpeed = 5.0
 _followPathPoint = true

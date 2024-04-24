@@ -6,11 +6,11 @@ namespace NexusExtensions;
 
 public class StateMachine
 {
-    private CharacterController _ctrl;
+    protected CharacterController _ctrl;
     public CharacterController Ctrl => _ctrl; 
-    private List<StateProperty> _properties = new List<StateProperty>();
+    protected List<StateProperty> _properties = new List<StateProperty>();
     public List<StateProperty> Properties => _properties;
-    private State _currentState;                    // Reference to the current state updating
+    protected State _currentState;                    // Reference to the current state updating
     public State EntryState;                            // Which state will start the state machine
 
     public List<StateUpdater> AllStateUpdaters = new List<StateUpdater>();
