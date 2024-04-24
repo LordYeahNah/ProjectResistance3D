@@ -78,6 +78,10 @@ transform = Transform3D(-0.266818, 0.963747, 0, 0.585223, 0.162022, 0.794521, 0.
 [node name="CameraController" parent="." instance=ExtResource("3_8dna5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2003, -4.76837e-07, 7.4794)
 _rotationSpeed = 5.0
+_zoomSpeed = 50.0
+
+[node name="Camera3D" parent="CameraController" index="0"]
+transform = Transform3D(-0.00915356, -0.508275, 0.861146, -0.00540241, 0.861195, 0.508246, -0.999944, -4.65688e-10, -0.0106289, 6.558, 6.73248, 0)
 
 [node name="PathPointController" parent="." instance=ExtResource("4_gitju")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -1)

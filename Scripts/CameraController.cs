@@ -5,12 +5,12 @@ public partial class CameraController : Node3D
 {
     private Camera3D _camRef;                       // Store reference to the camera
 
-    [Export]
-    private float _movementSpeed;                   // Speed the camera will move at
+    [Export] private float _movementSpeed;                   // Speed the camera will move at
+    [Export] private float _rotationSpeed;                   // Speed the character will rotate at
+    [Export] private float _zoomSpeed;                          // Speed the camera will zoom at
 
-    [Export]
-    private float _rotationSpeed;                   // Speed the character will rotate at
-
+    private float _deltaTime;
+    
     public override void _Ready()
     {
         base._Ready();
@@ -24,6 +24,25 @@ public partial class CameraController : Node3D
         base._Process(dt);
         HandleCameraMovement((float)dt);
         RotateCamera((float)dt);
+
+        _deltaTime = (float)dt;
+    }
+
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        base._UnhandledInput(@event);
+        if (@event is InputEventMouseButton inputEvent)
+        {
+            if (inputEvent.ButtonIndex == MouseButton.WheelDown)
+            {
+                var forward = _camRef.Transform.Basis.Z * (1 * (_zoomSpeed * _deltaTime));
+                _camRef.Position += forward;
+            } else if (inputEvent.ButtonIndex == MouseButton.WheelUp)
+            {
+                var forward = _camRef.Transform.Basis.Z * (1 * (_zoomSpeed * _deltaTime));
+                _camRef.Position -= forward;
+            }
+        }
     }
 
     private void HandleCameraMovement(float dt)
