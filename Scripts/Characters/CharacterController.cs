@@ -1,7 +1,6 @@
-using System.Collections.Generic;
-using System.Diagnostics;
 using Godot;
 using NexusExtensions;
+using NexusExtensions.Animation;
 
 public partial class CharacterController : CharacterBody3D
 {

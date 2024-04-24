@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 
-namespace NexusExtensions;
+namespace NexusExtensions.Animation;
 
 public class Animation : State
 {
