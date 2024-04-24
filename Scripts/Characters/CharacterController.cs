@@ -45,6 +45,7 @@ public partial class CharacterController : CharacterBody3D
     public NavigationAgent3D Agent => _agent;
     private StateMachine _stateMachine;
     public StateMachine StateMachineRef => _stateMachine;
+    private SightController _sight;
     
     // === Follow Path Settings === //
     [ExportGroup("Follow Path Settings")]
@@ -90,6 +91,18 @@ public partial class CharacterController : CharacterBody3D
         _animPlayer = GetNode<AnimationPlayer>("Character/AnimationPlayer");
         if(_animPlayer == null)
             GD.PrintErr("CharacterController -> Failed to get reference to the animation player");
+
+        // Get reference to the sigh point
+        _sight = GetNode<SightController>("SightPoint");
+        if (_sight != null)
+        {
+            _sight.CharacterSeenEvent += OnSeeCharacter;
+            _sight.CharacterLostSightEvent += OnLoseCharacter;
+        } else
+        {
+            GD.PrintErr("CharacterController -> Failed to get reference to the sight point");
+        }
+
 
         // Create and start the new animator
         _anim = new GeneralAnimator();
@@ -240,5 +253,47 @@ public partial class CharacterController : CharacterBody3D
     protected void StopFollowPath()
     {
         // TODO: Disable the follow path
+    }
+
+    // === AI Sight Settings === //
+
+    /// <summary>
+    /// If the character has been seen by an enemy
+    /// </summary>
+    /// <param name="seenBy">The character that has seen this target</param>
+    public virtual void OnCharacterSeen(CharacterController seenBy)
+    {
+        // TODO
+        GD.Print("CharacterController -> Enemy has been seen");
+    }
+
+    /// <summary>
+    /// If this character is now hidden from the enemy
+    /// </summary>
+    /// <param name="seenBy"></param>
+    public virtual void OnCharacterHidden(CharacterController seenBy)
+    {
+        // TODO
+        GD.Print("CharacterController -> Enemy has lost sight");
+    }
+
+    /// <summary>
+    /// When the character sees an enemy
+    /// </summary>
+    /// <param name="seenCharacter">Enemy that was seen</param>
+    public virtual void OnSeeCharacter(CharacterController seenCharacter)
+    {
+        // TODO
+        GD.Print("CharacterController -> Character has seen enemy");
+    }
+
+    /// <summary>
+    /// When the character loses sight of a character
+    /// </summary>
+    /// <param name="seenCharacter">Enemy the character has lost sight of</param>
+    public virtual void OnLoseCharacter(CharacterController seenCharacter)
+    {
+        // TODO
+        GD.Print("CharacterController -> Character has lost sight of enemy");
     }
 }

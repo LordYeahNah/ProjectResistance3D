@@ -143,4 +143,7 @@ visible = false
 [node name="SM_Char_Attach_Male_Armor_03" parent="Character/Armature/Skeleton3D" index="20"]
 visible = false
 
+[node name="SightPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.353284, 1.42326, 0)
+
 [editable path="Character"]

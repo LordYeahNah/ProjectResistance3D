@@ -14,3 +14,8 @@ export_presets.cfg
 data_*/
 mono_crash.*.json
 /Scripts/.VSCodeCounter
+*.v2
+*.vsidx
+/.vs
+/.vs
+*.vsidx
