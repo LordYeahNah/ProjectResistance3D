@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://Scripts/PathPointController.cs" id="1_214xc"]
 
-[node name="PathPointController" type="Node3D"]
+[node name="PathPointController" type="Node3D" groups=["PathPoints"]]
 script = ExtResource("1_214xc")

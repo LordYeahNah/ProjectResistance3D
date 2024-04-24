@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 project/assembly_name="ProjectResistance3D"
 
+[global_group]
+
+PathPoints=""
+
 [input]
 
 MoveForward={

@@ -43,7 +43,19 @@ public partial class CharacterController : CharacterBody3D
     [ExportGroup("Follow Path Settings")]
     [Export] private bool _followPathPoint;                             // Flag if the character is to follow a path point
     [Export] private PathPointController _followPathController;                         // reference to the path the character is following
-    public PathPointController FollowPathController => _followPathController;
+
+    public PathPointController FollowPathController
+    {
+        get => _followPathController;
+        set
+        {
+            _followPathController = value;
+            if (_followPathController == null)
+            {
+                StopFollowPath();
+            }
+        }
+    } 
     
 
     public override void _Ready()
@@ -60,13 +72,7 @@ public partial class CharacterController : CharacterBody3D
         _anim = new Animator();
         _anim.OnStart(this);
 
-        if (_followPathPoint)
-        {
-            if (_followPathController == null)
-            {
-                // TODO: Find random path point
-            }
-        }
+        FindRandomPathPointInWorld();                       // Finds a path point to follow
 
         Callable.From(ActorSetup).CallDeferred();
     }
@@ -130,5 +136,69 @@ public partial class CharacterController : CharacterBody3D
     {
         _stateMachine = new GuardStateMachine();
         _stateMachine.OnStart(this);
+    }
+
+    /// <summary>
+    /// Sets the already assigned path point
+    /// </summary>
+    protected void SetPathPoint()
+    {
+        if (_followPathPoint && _followPathController != null)
+        {
+            _followPathController.FollowingCharacter = this;
+        }
+    }
+    
+    /// <summary>
+    /// Finds a random path within the scene for the character to follow
+    /// </summary>
+    protected void FindRandomPathPointInWorld()
+    {
+        if (_followPathPoint)
+        {
+            if (_followPathController == null)
+            {
+                RandomNumberGenerator rand = new RandomNumberGenerator();
+                // Get reference to all the path points in the scene
+                var pathPoints = GetTree().GetNodesInGroup("PathPoints");
+                
+                GD.Print(pathPoints.Count);
+
+                if (pathPoints.Count == 0)
+                    return;
+                
+                // Check at least 50 times for a path to follow
+                for (int i = 0; i < 50; i++)
+                {
+                    rand.Randomize();
+                    var pointIndex = rand.RandiRange(0, pathPoints.Count);                  // Determine the path index
+                    var pathPoint = (PathPointController)pathPoints[pointIndex];                // Get reference to the path point
+                    // Make sure the path isn't null
+                    if (pathPoint != null)
+                    {
+                        // Check if we can assign this character to the path
+                        if (pathPoint.FollowingCharacter == null || pathPoint.FollowingCharacter == this)
+                        {
+                            pathPoint.FollowingCharacter = this;
+                            return;
+                        }
+                    }
+                }
+
+                
+            }
+        }
+        
+        if (_followPathController == null)
+        {
+            GD.Print("CharacterController -> Failed to find path to follow");
+            _followPathPoint = false;
+            StopFollowPath();
+        }
+    }
+
+    protected void StopFollowPath()
+    {
+        // TODO: Disable the follow path
     }
 }
