@@ -16,7 +16,9 @@ public partial class CharacterController : CharacterBody3D
     protected AnimationPlayer _animPlayer;
     public AnimationPlayer AnimPlayer => _animPlayer;
     protected Animator _anim;                   // Reference to the animator
-
+    
+    
+    // === Movement Properties === //
     private bool _hasMoveToLocation = false;
     private Vector3 _moveToLocation;
 
@@ -61,14 +63,17 @@ public partial class CharacterController : CharacterBody3D
     public override void _Ready()
     {
         base._Ready();
+        // Get reference to the AI agent
         _agent = GetNode<NavigationAgent3D>("NavAgent");
         if(_agent == null)
             GD.PrintErr("CharacterController -> Failed to get reference to the navigation agent");
 
+        // Get reference to the animation player
         _animPlayer = GetNode<AnimationPlayer>("Character/AnimationPlayer");
         if(_animPlayer == null)
             GD.PrintErr("CharacterController -> Failed to get reference to the animation player");
 
+        // Create and start the new animator
         _anim = new Animator();
         _anim.OnStart(this);
 
@@ -80,9 +85,11 @@ public partial class CharacterController : CharacterBody3D
     public override void _Process(double dt)
     {
         base._Process(dt);
+        // Update the state machine
         if(_stateMachine != null)
             _stateMachine.OnUpdate((float)dt);
         
+        // Update the animator
         if(_anim != null)
             _anim.OnUpdate((float)dt);
     }
@@ -91,20 +98,26 @@ public partial class CharacterController : CharacterBody3D
     {
         base._PhysicsProcess(delta);
         
-        HandleMovement((float)delta);
+        HandleMovement((float)delta);                   // Handle movement
     }
 
+    /// <summary>
+    /// Handles moving the character to the target location if it is set
+    /// </summary>
+    /// <param name="dt"></param>
     private void HandleMovement(float dt)
     {
+        // Check that we can move
         if (!_hasMoveToLocation || _agent == null || _agent.IsNavigationFinished())
             return;
 
-        var currentPos = GlobalTransform.Origin;
-        var nextPathPosition = _agent.GetNextPathPosition();
+        var currentPos = GlobalTransform.Origin;                    // Get reference to the current position
+        var nextPathPosition = _agent.GetNextPathPosition();            // Get reference to the next point in the paht
 
-        Velocity = currentPos.DirectionTo(nextPathPosition) * _generalMovementSpeed;
-        MoveAndSlide();
+        Velocity = currentPos.DirectionTo(nextPathPosition) * _generalMovementSpeed;                // Apply the velocity
+        MoveAndSlide();                 // Move the character
 
+        // Handle rotating the character in the movement direction
         if (Velocity.Length() > 0f)
         {
             var angle = Mathf.Atan2(-Velocity.Z, Velocity.X);
@@ -119,9 +132,10 @@ public partial class CharacterController : CharacterBody3D
     /// <param name="moveTo">Location to move to (set to Zero to stop)</param>
     public void SetMoveToLocation(Vector3 moveTo)
     {
-        MoveToLocation = moveTo;
-        _hasMoveToLocation = moveTo != Vector3.Zero;
-        // Setup the animator
+        MoveToLocation = moveTo;                        // Set the move to location
+        _hasMoveToLocation = moveTo != Vector3.Zero;                // Determine if we have a location to move to
+        
+        // update the animator if we are moving or not
         if(_anim != null)
             _anim.SetStateProperty("IsMoving", _hasMoveToLocation);
     }
@@ -132,6 +146,9 @@ public partial class CharacterController : CharacterBody3D
         CreateStateMachine();
     }
 
+    /// <summary>
+    /// Creates and starts the state machine
+    /// </summary>
     protected virtual void CreateStateMachine()
     {
         _stateMachine = new GuardStateMachine();
