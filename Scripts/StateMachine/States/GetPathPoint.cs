@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 using NexusExtensions;
@@ -6,7 +7,9 @@ public class GetPathPoint : State
 {
     private readonly float STOPPING_DISTANCE = 3f;
     private PathPointController _pathPointCtrl;                     // Store reference to the path point controller
+    public PathPointController PathPointCtrl => _pathPointCtrl;
     private int _currentPathIndex;
+    public int CurrentPathIndex => _currentPathIndex;
     
     private enum ECurrentDirection
     {
@@ -24,7 +27,7 @@ public class GetPathPoint : State
     {
     }
 
-    public void OnEnter()
+    public override void OnEnter()
     {
         if (_pathPointCtrl == null)
         {
@@ -33,6 +36,10 @@ public class GetPathPoint : State
                 GD.PrintErr("GetPathPoint -> Failed to get reference to the follow path");
         }
         base.OnEnter();
+        
+        // Reset the properties
+        _stateMachine.SetStateProperty<bool>("HasReachedPathPoint", false);
+        _stateMachine.SetStateProperty<bool>("IsAtPathEnd", false);
     }
 
     public override void OnUpdate(float dt)
@@ -49,7 +56,7 @@ public class GetPathPoint : State
         {
             // Update the properties of the state machine
             _stateMachine.SetStateProperty("MoveToLocation", nextPathPoint.GlobalPosition);
-            _stateMachine.SetStateProperty("HasMoveToLocation", nextPathPoint.GlobalPosition);
+            _stateMachine.SetStateProperty("HasMoveToLocation", true);
         }
 
         OnFinish();                 // Finish the task

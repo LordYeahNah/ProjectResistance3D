@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmxccpebb4foe"]
+
+[ext_resource type="Script" path="res://Scripts/PathPointController.cs" id="1_214xc"]
+
+[node name="PathPointController" type="Node3D"]
+script = ExtResource("1_214xc")

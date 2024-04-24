@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using Godot;
 using NexusExtensions;
 
@@ -40,6 +41,7 @@ public partial class CharacterController : CharacterBody3D
     
     // === Follow Path Settings === //
     [ExportGroup("Follow Path Settings")]
+    [Export] private bool _followPathPoint;                             // Flag if the character is to follow a path point
     [Export] private PathPointController _followPathController;                         // reference to the path the character is following
     public PathPointController FollowPathController => _followPathController;
     
@@ -57,6 +59,14 @@ public partial class CharacterController : CharacterBody3D
 
         _anim = new Animator();
         _anim.OnStart(this);
+
+        if (_followPathPoint)
+        {
+            if (_followPathController == null)
+            {
+                // TODO: Find random path point
+            }
+        }
 
         Callable.From(ActorSetup).CallDeferred();
     }
@@ -76,7 +86,6 @@ public partial class CharacterController : CharacterBody3D
         base._PhysicsProcess(delta);
         
         HandleMovement((float)delta);
-        
     }
 
     private void HandleMovement(float dt)
@@ -119,7 +128,7 @@ public partial class CharacterController : CharacterBody3D
 
     protected virtual void CreateStateMachine()
     {
-        _stateMachine = new WanderStateMachine();
+        _stateMachine = new GuardStateMachine();
         _stateMachine.OnStart(this);
     }
 }

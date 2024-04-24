@@ -76,6 +76,30 @@ public class StateMachine
                 }
             }
         }
+
+        if (_currentState is SubStateMachine subState)
+        {
+            foreach (var state in AllStateUpdaters)
+            {
+                if (_activeStateUpdaters.Contains(state))
+
+                {
+                    if (subState.CurrentState != state.StateRef)
+                    {
+                        state.OnExit();
+                        _activeStateUpdaters.Remove(state);
+                    }
+                }
+                else
+                {
+                    if (subState.CurrentState == state.StateRef)
+                    {
+                        state.OnEnter();
+                        _activeStateUpdaters.Add(state);
+                    }
+                }
+            }
+        }
     }
     
     

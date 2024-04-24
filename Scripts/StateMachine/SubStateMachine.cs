@@ -7,6 +7,8 @@ public class SubStateMachine : State
 {
     protected State _currentState;
     public State EntryState;
+
+    public State CurrentState => _currentState;
     
     public SubStateMachine(StateMachine stateMach, bool hasExit = false, bool loop = false) : base(stateMach, hasExit, loop)
     {

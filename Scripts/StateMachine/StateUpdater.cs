@@ -5,11 +5,13 @@ namespace NexusExtensions;
 
 public class StateUpdater
 {
-    private State _stateRef;
+    protected State _stateRef;
     public State StateRef => _stateRef;
+    protected StateMachine _stateMachine;
 
-    public StateUpdater(State stateRef)
+    public StateUpdater(State stateRef, StateMachine stateMach)
     {
+        _stateMachine = stateMach;
         _stateRef = stateRef;
     }
     

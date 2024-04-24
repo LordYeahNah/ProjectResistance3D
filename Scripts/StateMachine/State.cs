@@ -9,6 +9,9 @@ public class State
     protected StateMachine _stateMachine;                       // Store reference to the state machine
     public State NextState;                                 // State to transition to
 
+    public string StateName;
+    public string StateDescription;
+
     public List<StateTransition> Transitions = new List<StateTransition>();             // Store reference to the state transitions
 
     public bool HasExit;

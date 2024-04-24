@@ -4,12 +4,13 @@ using NexusExtensions;
 
 public class MoveToLocationState : State
 {
-    private readonly float STOPPING_DISTANCE = 3f;
+    public static readonly float STOPPING_DISTANCE = 1f;
     
     private CharacterController _ctrl;
     public MoveToLocationState(StateMachine stateMach, bool hasExit = false, bool loop = false) : base(stateMach, hasExit, loop)
     {
-        
+        StateName = "Move To Location";
+        StateDescription = "Handles moving the character to the specified position";
     }
 
     public MoveToLocationState(StateMachine stateMach, SubStateMachine subState, bool hasExit = false, bool loop = false) : base(stateMach, subState, hasExit, loop)
@@ -47,11 +48,5 @@ public class MoveToLocationState : State
                 _ctrl.SetMoveToLocation(moveToPos);
             }
         }
-    }
-
-    public override void OnFinish()
-    {
-        GD.Print("Finished Move To Task");
-        base.OnFinish();
     }
 }
