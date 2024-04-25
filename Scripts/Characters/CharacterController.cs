@@ -46,6 +46,7 @@ public partial class CharacterController : CharacterBody3D
     private StateMachine _stateMachine;
     public StateMachine StateMachineRef => _stateMachine;
     private SightController _sight;
+    public SightController Sight => _sight;
     
     // === Follow Path Settings === //
     [ExportGroup("Follow Path Settings")]

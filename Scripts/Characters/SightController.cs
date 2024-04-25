@@ -8,7 +8,7 @@ public partial class SightController : Node3D
 
     [Export] protected float _coneAngle;
     [Export] protected float _sightDistance;
-    public List<CharacterController> _enemies = new List<CharacterController>();
+    public List<CharacterController> Enemies = new List<CharacterController>();
     protected List<CharacterController> _currentEnemiesInSight = new List<CharacterController>();
 
     public event Action<CharacterController> CharacterSeenEvent;
@@ -29,7 +29,7 @@ public partial class SightController : Node3D
 
     protected void DetectSight()
     {
-        foreach(var enemy in _enemies)
+        foreach(var enemy in Enemies)
         {
             var toTarget = enemy.GlobalTransform.Origin - this.GlobalTransform.Origin;
             var forward = GlobalTransform.Basis.X;
