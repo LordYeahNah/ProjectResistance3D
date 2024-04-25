@@ -73,6 +73,9 @@ _rotationSpeed = 5.0
 [node name="Character_SportyMale_01" parent="CharacterBody3D/Character/Armature/Skeleton3D" index="12"]
 visible = true
 
+[node name="BoneAttachment3D" parent="CharacterBody3D/Character/Armature/Skeleton3D" index="21"]
+transform = Transform3D(-0.011192, 0.995286, 0.0963421, -0.803877, -0.0662584, 0.591095, 0.594688, -0.0708293, 0.800823, -24.9146, 24.5636, -99.9801)
+
 [node name="CharacterBody3D2" parent="." groups=["ResistanceCharacter"] instance=ExtResource("2_12ykx")]
 transform = Transform3D(1.00704, 0, 0, 0, 1.00704, 0, 0, 0, 1.00704, -10.8704, 0.07368, 5.60602)
 _generalMovementSpeed = 2.0
@@ -87,6 +90,9 @@ visible = true
 
 [node name="SM_Char_Attach_Male_Armor_03" parent="CharacterBody3D2/Character/Armature/Skeleton3D" index="20"]
 visible = false
+
+[node name="BoneAttachment3D" parent="CharacterBody3D2/Character/Armature/Skeleton3D" index="21"]
+transform = Transform3D(-0.011192, 0.995286, 0.0963421, -0.803877, -0.0662584, 0.591095, 0.594688, -0.0708293, 0.800823, -24.9146, 24.5636, -99.9801)
 
 [node name="SightPoint" parent="CharacterBody3D2" index="3"]
 _coneAngle = 90.0
@@ -133,7 +139,9 @@ skeleton = NodePath("../../Node3D")
 
 [editable path="CharacterBody3D"]
 [editable path="CharacterBody3D/Character"]
+[editable path="CharacterBody3D/Character/Armature/Skeleton3D/BoneAttachment3D/AR_01"]
 [editable path="CharacterBody3D2"]
 [editable path="CharacterBody3D2/Character"]
+[editable path="CharacterBody3D2/Character/Armature/Skeleton3D/BoneAttachment3D/AR_01"]
 [editable path="CameraController"]
 [editable path="PathPointController"]

@@ -87,6 +87,12 @@ public partial class CharacterController : CharacterBody3D
                 _anim.SetStateProperty(GeneralAnimKeys.ARMED_STATE, (int)value, EPropertyType.PROP_Int);
         }
     }
+
+    // === Weapon Settings === //
+    [Export] protected bool _hasWeapon;
+    [Export] protected string _spawnWithWeaponName;
+    protected WeaponController _assignedWeapon;
+    protected BoneAttachment3D _weaponHandAttachment;
     
 
     public override void _Ready()
@@ -117,6 +123,11 @@ public partial class CharacterController : CharacterBody3D
         _headSight = GetNode<Node3D>("SightPoint/HeadSight");
         _bodySight = GetNode<Node3D>("SightPoint/BodySight");
         _feetSight = GetNode<Node3D>("SightPoint/FeetSight");
+
+
+        _weaponHandAttachment = GetNode<BoneAttachment3D>("Character/Armature/Skeleton3D/BoneAttachment3D");
+        if (_weaponHandAttachment == null)
+            GD.PrintErr("CharacterController -> Failed to get reference to the weapon hand attachment");
         
 
         // Create and start the new animator
@@ -268,6 +279,30 @@ public partial class CharacterController : CharacterBody3D
     protected void StopFollowPath()
     {
         // TODO: Disable the follow path
+    }
+
+    protected void SetWeapon(string weaponID, bool usingName = true)
+    {
+        // TODO: Despawn any attached weapons
+        var weapon = GetNode<WeaponDatabase>("/root/WeaponDatabase")?.GetWeapon(weaponID, usingName);
+
+        if(weapon != null)
+        {
+            var weaponScene = GD.Load<PackedScene>(weapon.WeaponPath);
+            if(weaponScene != null)
+            {
+                var weaponInstance = weaponScene.Instantiate();
+                if(weaponInstance != null)
+                {
+                    _weaponHandAttachment.AddChild(weaponInstance);
+                    if (weaponInstance is WeaponController wpnCtrl)
+                        wpnCtrl.Setup(weapon);
+                }
+            } else
+            {
+                GD.PrintErr("CharacterController -> Failed to find path to the weapon prefab " + weaponID + ":" + weapon.WeaponPath);
+            }
+        }
     }
 
     // === AI Sight Settings === //

@@ -1,0 +1,24 @@
+[
+    {
+        "WeaponID": "WP_AR01",
+        "WeaponName": "Assault Rifle 01",
+        "WeaponType": 1,
+        "WeaponPath": "res://Prefabs/Weapons/AR/ar_01.tscn",
+        "DamagePoints": 13.0,
+        "CriticalHitChance": 0.2,
+        "CriticalHitModifier": 1.3,
+        "WeaponCooldown": 2.0,
+        "AmmoInMag": 30
+    },
+    {
+        "WeaponID": "WP_AR02",
+        "WeaponName": "Assault Rifle 02",
+        "WeaponType": 1,
+        "WeaponPath": "res://Prefabs/Weapons/AR/ar_01.tscn",
+        "DamagePoints": 13.0,
+        "CriticalHitChance": 0.2,
+        "CriticalHitModifier": 1.3,
+        "WeaponCooldown": 2.0,
+        "AmmoInMag": 30
+    }
+]

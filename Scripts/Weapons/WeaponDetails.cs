@@ -18,6 +18,7 @@ public class WeaponDetails
     public readonly string WEAPON_ID;
     public string WeaponName;                           // Name of the weapon     
     public EWeaponType WeaponType;                          // Type of the weapon
+    public string WeaponPath;
 
     // === Weapon Settings === //
     protected float _damagePoints;
@@ -35,6 +36,7 @@ public class WeaponDetails
         WEAPON_ID = weapon.WeaponID;
         WeaponName = weapon.WeaponName;
         WeaponType = (EWeaponType)weapon.WeaponType;
+        WeaponPath = weapon.WeaponPath;
 
         _damagePoints = weapon.DamagePoints;
         _criticalHitChance = weapon.CriticalHitChance;
@@ -99,6 +101,8 @@ public class JsonWeapon
     public string WeaponName;
     [JsonProperty]
     public int WeaponType;
+    [JsonProperty]
+    public string WeaponPath;
     [JsonProperty]
     public float DamagePoints;
     [JsonProperty]

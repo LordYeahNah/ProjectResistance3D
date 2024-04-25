@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnfbdnnddicml"]
+
+[ext_resource type="PackedScene" uid="uid://bjaj0llw3j8ng" path="res://Meshes/Weapons/AR_01.glb" id="1_b33li"]
+[ext_resource type="Script" path="res://Scripts/Weapons/WeaponController.cs" id="2_r1ybr"]
+[ext_resource type="Texture2D" uid="uid://drd6f34qygow2" path="res://Meshes/Weapons/Wep_Skin_01.png" id="3_255g4"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_n4j57"]
+albedo_texture = ExtResource("3_255g4")
+
+[node name="AR_01" instance=ExtResource("1_b33li")]
+script = ExtResource("2_r1ybr")
+
+[node name="SM_Wep_Rifle_Assault_01" parent="." index="0"]
+surface_material_override/0 = SubResource("ORMMaterial3D_n4j57")
+
+[node name="SM_Wep_Rifle_Assault_Flash_01" parent="SM_Wep_Rifle_Assault_01" index="0"]
+surface_material_override/0 = SubResource("ORMMaterial3D_n4j57")
+
+[node name="SM_Wep_Rifle_Assault_Mag_01" parent="SM_Wep_Rifle_Assault_01" index="1"]
+surface_material_override/0 = SubResource("ORMMaterial3D_n4j57")
+
+[node name="SM_Wep_Rifle_Assault_Sight_01" parent="SM_Wep_Rifle_Assault_01" index="2"]
+surface_material_override/0 = SubResource("ORMMaterial3D_n4j57")
+
+[node name="SM_Wep_Rifle_Assault_Sight_02" parent="SM_Wep_Rifle_Assault_01" index="3"]
+surface_material_override/0 = SubResource("ORMMaterial3D_n4j57")
+
+[node name="SM_Wep_Rifle_Assault_Slide_01" parent="SM_Wep_Rifle_Assault_01" index="4"]
+surface_material_override/0 = SubResource("ORMMaterial3D_n4j57")
+
+[node name="SM_Wep_Rifle_Assault_Stock_01" parent="SM_Wep_Rifle_Assault_01" index="5"]
+surface_material_override/0 = SubResource("ORMMaterial3D_n4j57")
+
+[node name="SM_Wep_Rifle_Assault_Trigger_01" parent="SM_Wep_Rifle_Assault_01" index="6"]
+surface_material_override/0 = SubResource("ORMMaterial3D_n4j57")
