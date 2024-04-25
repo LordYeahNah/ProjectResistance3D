@@ -301,7 +301,22 @@ public partial class CharacterController : CharacterBody3D
                 {
                     _weaponHandAttachment.AddChild(weaponInstance);
                     if (weaponInstance is WeaponController wpnCtrl)
+                    {
                         wpnCtrl.Setup(weapon);
+                        if(_anim != null)
+                        {
+                            switch(weapon.WeaponType)
+                            {
+                                case EWeaponType.WPN_Rifle:
+                                    _anim.SetStateProperty<int>(GeneralAnimKeys.ARMED_STATE, (int)EArmedState.ARMED_Rifle);
+                                    break;
+                                default:
+                                    _anim.SetStateProperty<int>(GeneralAnimKeys.ARMED_STATE, (int)EArmedState.ARMED_Unarmed);
+                                    break;
+                            }
+                        }
+                    }
+                        
                 }
             } else
             {
