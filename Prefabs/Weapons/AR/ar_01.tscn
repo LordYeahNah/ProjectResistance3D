@@ -8,6 +8,7 @@
 albedo_texture = ExtResource("3_255g4")
 
 [node name="AR_01" instance=ExtResource("1_b33li")]
+transform = Transform3D(12.9208, -55.234, -69.8731, 88.765, 2.16937, 14.6993, -7.33692, -71.0246, 54.7875, -12.973, 5.763, 3.657)
 script = ExtResource("2_r1ybr")
 
 [node name="SM_Wep_Rifle_Assault_01" parent="." index="0"]
