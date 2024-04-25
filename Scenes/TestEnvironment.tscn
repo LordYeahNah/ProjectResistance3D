@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://d3op8kuajg1yq"]
+[gd_scene load_steps=13 format=3 uid="uid://d3op8kuajg1yq"]
 
+[ext_resource type="Script" path="res://Scripts/World/SceneController.cs" id="1_bwjum"]
 [ext_resource type="Texture2D" uid="uid://qruc0poge1rq" path="res://Textures/GridWhite.png" id="1_uvwl8"]
 [ext_resource type="PackedScene" uid="uid://csx2j5nue1pgq" path="res://Prefabs/CharacterPF.tscn" id="2_12ykx"]
 [ext_resource type="PackedScene" uid="uid://duh065j5srnj8" path="res://Prefabs/CameraPF.tscn" id="3_8dna5"]
@@ -28,6 +29,8 @@ sky = SubResource("Sky_3agig")
 [sub_resource type="SphereMesh" id="SphereMesh_7p0jv"]
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_bwjum")
+WorldName = "TestEnvironment"
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_tj6wu")
@@ -41,17 +44,31 @@ surface_material_override/0 = SubResource("ORMMaterial3D_x0ofh")
 [node name="Node3D" type="Node3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.03798, 0, -8.73276)
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("2_12ykx")]
+[node name="CharacterBody3D" parent="." groups=["SoldierGroup"] instance=ExtResource("2_12ykx")]
+transform = Transform3D(1.00704, 0, 0, 0, 1.00704, 0, 0, 0, 1.00704, 10.2392, 0.07368, 3.96761)
+_generalMovementSpeed = 2.0
+_rotationSpeed = 5.0
+
+[node name="Character_SportyMale_01" parent="CharacterBody3D/Character/Armature/Skeleton3D" index="12"]
+visible = true
+
+[node name="CharacterBody3D2" parent="." groups=["ResistanceCharacter"] instance=ExtResource("2_12ykx")]
 transform = Transform3D(1.00704, 0, 0, 0, 1.00704, 0, 0, 0, 1.00704, -10.8704, 0.07368, 5.60602)
 _generalMovementSpeed = 2.0
 _rotationSpeed = 5.0
 _followPathPoint = true
 
-[node name="CharacterBody3D2" parent="." instance=ExtResource("2_12ykx")]
-transform = Transform3D(1.00704, 0, 0, 0, 1.00704, 0, 0, 0, 1.00704, -10.8704, 0.07368, 5.60602)
-_generalMovementSpeed = 2.0
-_rotationSpeed = 5.0
-_followPathPoint = true
+[node name="Character_MilitaryMale_01" parent="CharacterBody3D2/Character/Armature/Skeleton3D" index="7"]
+visible = false
+
+[node name="Character_RedneckMale_01" parent="CharacterBody3D2/Character/Armature/Skeleton3D" index="8"]
+visible = true
+
+[node name="SM_Char_Attach_Male_Armor_03" parent="CharacterBody3D2/Character/Armature/Skeleton3D" index="20"]
+visible = false
+
+[node name="SightPoint" parent="CharacterBody3D2" index="3"]
+_coneAngle = 90.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_plhjg")
@@ -93,5 +110,9 @@ transform = Transform3D(0.262084, 0, 0, 0, 0.262084, 0, 0, 0, 0.262084, 0, 0, 0)
 mesh = SubResource("SphereMesh_7p0jv")
 skeleton = NodePath("../../Node3D")
 
+[editable path="CharacterBody3D"]
+[editable path="CharacterBody3D/Character"]
+[editable path="CharacterBody3D2"]
+[editable path="CharacterBody3D2/Character"]
 [editable path="CameraController"]
 [editable path="PathPointController"]

@@ -39,6 +39,6 @@ public class Timer
 
     public void ResetTimer()
     {
-        _currentTimer = 0f;
+        _currentTime = 0f;
     }
 }

@@ -15,6 +15,22 @@ public partial class WorldManager : Node
     private List<World> _worlds = new List<World>();
     public World ActiveWorld;
 
+    public override void _Ready()
+    {
+        base._Ready();
+        ActiveWorld = new World("TestEnvironment", this);
+        _worlds.Add(ActiveWorld);
+    }
+
+    public World GetWorld(string name)
+    {
+        foreach (var world in _worlds)
+            if (world.WorldName == name)
+                return world;
+
+        return null;
+    }
+
     public override void _Process(double delta)
     {
         base._Process(delta);

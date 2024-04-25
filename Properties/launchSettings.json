@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "ProjectResistance3D": {
+      "commandName": "Project"
+    },
+    "GodotLaunch": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\KAMil\\Documents\\Godot\\Godot_v4.3-dev5_mono_win64\\Godot_v4.3-dev5_mono_win64\\Godot_v4.3-dev5_mono_win64.exe",
+      "workingDirectory": "C:\\Users\\KAMil\\Documents\\ProjectResistance3D",
+      "nativeDebugging": true
+    }
+  }
+}

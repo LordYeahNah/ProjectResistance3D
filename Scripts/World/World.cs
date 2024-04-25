@@ -3,19 +3,43 @@ using Godot;
 
 public class World
 {
+    protected WorldManager _owner;                      // Reference to the world manager
     public string WorldName;
     public List<CharacterController> CiviliansGroup = new List<CharacterController>();
     public List<CharacterController> ResistanceGroup = new List<CharacterController>();
     public List<CharacterController> SoldierEnemies = new List<CharacterController>();
 
-    public World(string name)
+    public World(string name, WorldManager manager)
     {
         WorldName = name;
+        _owner = manager;
     }
 
     public void OnEnter()
     {
+        if (CiviliansGroup.Count == 0)
+            CiviliansGroup = _owner.GetCivilanGroup(this);
 
+        if (ResistanceGroup.Count == 0)
+            ResistanceGroup = _owner.GetReistanceMembers(this);
+
+        if (SoldierEnemies.Count == 0)
+            SoldierEnemies = _owner.GetSoldierGroup(this);
+
+        // Assign the enemies
+        if(SoldierEnemies.Count > 0 && ResistanceGroup.Count > 0)
+        {
+           foreach(var soldier in SoldierEnemies)
+            {
+                foreach(var resist in ResistanceGroup)
+                {
+                    resist.Sight.Enemies.Clear();
+                    soldier.Sight.Enemies.Clear();
+                    soldier.Sight.Enemies.Add(resist);
+                    resist.Sight.Enemies.Add(soldier);
+                }
+            }
+        }
     }
 
     public virtual void OnUpdate(float dt)

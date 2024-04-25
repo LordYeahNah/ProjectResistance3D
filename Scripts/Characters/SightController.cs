@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -25,6 +25,7 @@ public partial class SightController : Node3D
     public override void _Process(double delta)
     {
         base._Process(delta);
+        DetectSight();
     }
 
     protected void DetectSight()
@@ -39,7 +40,7 @@ public partial class SightController : Node3D
             float dot = toTarget.Dot(forward);
             float angle = Mathf.RadToDeg(Mathf.Cos(dot));
 
-            if(angle < _coneAngle / 2 && Position.DistanceTo(toTarget) < _sightDistance)
+            if(angle < _coneAngle / 2 && toTarget.Length() < _sightDistance)
             {
                 if(!_currentEnemiesInSight.Contains(enemy))
                 {

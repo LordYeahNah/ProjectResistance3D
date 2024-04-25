@@ -1,12 +1,25 @@
-[gd_scene load_steps=6 format=3 uid="uid://csx2j5nue1pgq"]
+[gd_scene load_steps=11 format=3 uid="uid://csx2j5nue1pgq"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/CharacterController.cs" id="1_ohvve"]
 [ext_resource type="PackedScene" uid="uid://kbkly7o0q7wt" path="res://Meshes/Character.glb" id="2_nn0ai"]
 [ext_resource type="Texture2D" uid="uid://cdgwynb85ge7w" path="res://Meshes/Characters/Textures/PolygonBattleRoyale_Texture_01_A.png" id="3_s41ar"]
+[ext_resource type="Script" path="res://Scripts/Characters/SightController.cs" id="4_46l7y"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dwjtx"]
 
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_7ckel"]
+albedo_texture = ExtResource("3_s41ar")
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_1j4pw"]
+albedo_texture = ExtResource("3_s41ar")
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_r10kx"]
+albedo_texture = ExtResource("3_s41ar")
+
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_plsu8"]
+albedo_texture = ExtResource("3_s41ar")
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_g3qgs"]
 albedo_texture = ExtResource("3_s41ar")
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
@@ -82,6 +95,7 @@ bones/47/rotation = Quaternion(0.00447821, -6.71232e-05, 0.255496, 0.9668)
 
 [node name="Character_70sFemale_01" parent="Character/Armature/Skeleton3D" index="0"]
 visible = false
+surface_material_override/0 = SubResource("ORMMaterial3D_7ckel")
 
 [node name="Character_BusinessMale_01" parent="Character/Armature/Skeleton3D" index="1"]
 visible = false
@@ -102,10 +116,11 @@ visible = false
 visible = false
 
 [node name="Character_MilitaryMale_01" parent="Character/Armature/Skeleton3D" index="7"]
-visible = false
+surface_material_override/0 = SubResource("ORMMaterial3D_1j4pw")
 
 [node name="Character_RedneckMale_01" parent="Character/Armature/Skeleton3D" index="8"]
 visible = false
+surface_material_override/0 = SubResource("ORMMaterial3D_r10kx")
 
 [node name="Character_SportsBraFemale_01" parent="Character/Armature/Skeleton3D" index="9"]
 visible = false
@@ -117,6 +132,7 @@ visible = false
 visible = false
 
 [node name="Character_SportyMale_01" parent="Character/Armature/Skeleton3D" index="12"]
+visible = false
 surface_material_override/0 = SubResource("ORMMaterial3D_plsu8")
 
 [node name="Character_SportyMale_02" parent="Character/Armature/Skeleton3D" index="13"]
@@ -141,9 +157,12 @@ visible = false
 visible = false
 
 [node name="SM_Char_Attach_Male_Armor_03" parent="Character/Armature/Skeleton3D" index="20"]
-visible = false
+surface_material_override/0 = SubResource("ORMMaterial3D_g3qgs")
 
 [node name="SightPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.353284, 1.42326, 0)
+script = ExtResource("4_46l7y")
+_coneAngle = 45.0
+_sightDistance = 10.0
 
 [editable path="Character"]

@@ -15,6 +15,11 @@ run/main_scene="res://Scenes/TestEnvironment.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameController="*res://Scripts/GameController.cs"
+WorldManager="*res://Scripts/World/WorldManager.cs"
+
 [dotnet]
 
 project/assembly_name="ProjectResistance3D"
@@ -22,6 +27,8 @@ project/assembly_name="ProjectResistance3D"
 [global_group]
 
 PathPoints=""
+ResistanceCharacter=""
+SoldierGroup=""
 
 [input]
 
