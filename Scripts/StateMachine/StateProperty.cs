@@ -12,6 +12,7 @@ public enum EPropertyType
     PROP_Float,
     PROP_Int,
     PROP_Vector3,
+    PROP_Node3D
 }
 
 public class StateProperty

@@ -53,6 +53,11 @@ public class StateTransition
                                 if (curPropValue.Value != propVec3.Value)
                                     return false;
                             break;
+                        case EPropertyType.PROP_Node3D:
+                            if (curProp is StateValue<Node3D> curPropNode3D && prop is StateValue<Node3D> propNode3D)
+                                if (curPropNode3D.Value != propNode3D.Value)
+                                    return false;
+                            break;
                     }
                 }
             }
