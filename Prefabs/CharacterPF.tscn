@@ -1,10 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://csx2j5nue1pgq"]
+[gd_scene load_steps=11 format=3 uid="uid://csx2j5nue1pgq"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/CharacterController.cs" id="1_ohvve"]
 [ext_resource type="PackedScene" uid="uid://kbkly7o0q7wt" path="res://Meshes/Character.glb" id="2_nn0ai"]
 [ext_resource type="Texture2D" uid="uid://cdgwynb85ge7w" path="res://Meshes/Characters/Textures/PolygonBattleRoyale_Texture_01_A.png" id="3_s41ar"]
 [ext_resource type="Script" path="res://Scripts/Characters/SightController.cs" id="4_46l7y"]
-[ext_resource type="PackedScene" uid="uid://bjaj0llw3j8ng" path="res://Meshes/Weapons/AR_01.glb" id="4_i0e64"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dwjtx"]
 
@@ -21,12 +20,6 @@ albedo_texture = ExtResource("3_s41ar")
 albedo_texture = ExtResource("3_s41ar")
 
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_g3qgs"]
-albedo_texture = ExtResource("3_s41ar")
-
-[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_k0bqh"]
-albedo_texture = ExtResource("3_s41ar")
-
-[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_ka1tl"]
 albedo_texture = ExtResource("3_s41ar")
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
@@ -171,33 +164,6 @@ transform = Transform3D(-0.011192, 0.995286, 0.0963421, -0.803877, -0.0662584, 0
 bone_name = "Hand_R"
 bone_idx = 27
 
-[node name="AR_01" parent="Character/Armature/Skeleton3D/BoneAttachment3D" instance=ExtResource("4_i0e64")]
-transform = Transform3D(14.2736, -61.4769, -49.1615, 77.754, 3.22257, 18.5453, -12.271, -51.0902, 60.3259, -14.6656, -0.782433, -3.38951)
-
-[node name="SM_Wep_Rifle_Assault_01" parent="Character/Armature/Skeleton3D/BoneAttachment3D/AR_01" index="0"]
-surface_material_override/0 = SubResource("ORMMaterial3D_k0bqh")
-
-[node name="SM_Wep_Rifle_Assault_Flash_01" parent="Character/Armature/Skeleton3D/BoneAttachment3D/AR_01/SM_Wep_Rifle_Assault_01" index="0"]
-surface_material_override/0 = SubResource("ORMMaterial3D_ka1tl")
-
-[node name="SM_Wep_Rifle_Assault_Mag_01" parent="Character/Armature/Skeleton3D/BoneAttachment3D/AR_01/SM_Wep_Rifle_Assault_01" index="1"]
-surface_material_override/0 = SubResource("ORMMaterial3D_ka1tl")
-
-[node name="SM_Wep_Rifle_Assault_Sight_01" parent="Character/Armature/Skeleton3D/BoneAttachment3D/AR_01/SM_Wep_Rifle_Assault_01" index="2"]
-surface_material_override/0 = SubResource("ORMMaterial3D_ka1tl")
-
-[node name="SM_Wep_Rifle_Assault_Sight_02" parent="Character/Armature/Skeleton3D/BoneAttachment3D/AR_01/SM_Wep_Rifle_Assault_01" index="3"]
-surface_material_override/0 = SubResource("ORMMaterial3D_ka1tl")
-
-[node name="SM_Wep_Rifle_Assault_Slide_01" parent="Character/Armature/Skeleton3D/BoneAttachment3D/AR_01/SM_Wep_Rifle_Assault_01" index="4"]
-surface_material_override/0 = SubResource("ORMMaterial3D_ka1tl")
-
-[node name="SM_Wep_Rifle_Assault_Stock_01" parent="Character/Armature/Skeleton3D/BoneAttachment3D/AR_01/SM_Wep_Rifle_Assault_01" index="5"]
-surface_material_override/0 = SubResource("ORMMaterial3D_ka1tl")
-
-[node name="SM_Wep_Rifle_Assault_Trigger_01" parent="Character/Armature/Skeleton3D/BoneAttachment3D/AR_01/SM_Wep_Rifle_Assault_01" index="6"]
-surface_material_override/0 = SubResource("ORMMaterial3D_ka1tl")
-
 [node name="SightPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.353284, 1.42326, 0)
 script = ExtResource("4_46l7y")
@@ -213,4 +179,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.595384, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.27234, 0)
 
 [editable path="Character"]
-[editable path="Character/Armature/Skeleton3D/BoneAttachment3D/AR_01"]
