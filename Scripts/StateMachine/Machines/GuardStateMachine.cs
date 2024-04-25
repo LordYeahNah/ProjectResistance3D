@@ -18,9 +18,33 @@ public class GuardStateMachine : StateMachine
         SetStateProperty("WaitAtPathEnd", true, EPropertyType.PROP_Bool);
         SetStateProperty("IsAtPathEnd", false, EPropertyType.PROP_Bool);
         SetStateProperty("HasReachedPathPoint", false, EPropertyType.PROP_Bool);
+        SetStateProperty("HasTarget", false, EPropertyType.PROP_Bool);
+        SetStateProperty<Node3D>("Target", null, EPropertyType.PROP_Node2D);
         
         // Setup the state machine
         SubStateMachine patrolSubState = new PartolSubState(this, false, false);
         EntryState = patrolSubState;
+
+        var combatState = new CombatSubState(this, false, false);
+
+        var patrolToCombat = new StateTransition
+        {
+            _requiredProps = new List<StateProperty>
+            {
+                new StateValue<bool>("HasTarget", true, EPropertyType.PROP_Bool)
+            },
+            NextState = combatState
+        };
+        patrolSubState.Transitions.Add(patrolToCombat);
+
+        var combatToPatrol = new StateTransition
+        {
+            _requiredProps = new List<StateProperty>
+            {
+                new StateValue<bool>("HasTarget", false, EPropertyType.PROP_Bool)
+            },
+            NextState = patrolSubState
+        };
+        combatState.Transitions.Add(combatToPatrol);
     }
 }
