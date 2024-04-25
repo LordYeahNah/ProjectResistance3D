@@ -45,8 +45,17 @@ public partial class CharacterController : CharacterBody3D
     public NavigationAgent3D Agent => _agent;
     private StateMachine _stateMachine;
     public StateMachine StateMachineRef => _stateMachine;
+
+    // === Sight Properties === //
     private SightController _sight;
     public SightController Sight => _sight;
+    protected Node3D _headSight;
+    protected Node3D _bodySight;
+    protected Node3D _feetSight;
+
+    public Vector3 HeadSight => _headSight.GlobalPosition;
+    public Vector3 BodySight => _bodySight.GlobalPosition;
+    public Vector3 FeetSight => _feetSight.GlobalPosition;
     
     // === Follow Path Settings === //
     [ExportGroup("Follow Path Settings")]
@@ -93,6 +102,7 @@ public partial class CharacterController : CharacterBody3D
         if(_animPlayer == null)
             GD.PrintErr("CharacterController -> Failed to get reference to the animation player");
 
+        // === Sight Points === //
         // Get reference to the sigh point
         _sight = GetNode<SightController>("SightPoint");
         if (_sight != null)
@@ -104,6 +114,10 @@ public partial class CharacterController : CharacterBody3D
             GD.PrintErr("CharacterController -> Failed to get reference to the sight point");
         }
 
+        _headSight = GetNode<Node3D>("SightPoint/HeadSight");
+        _bodySight = GetNode<Node3D>("SightPoint/BodySight");
+        _feetSight = GetNode<Node3D>("SightPoint/FeetSight");
+        
 
         // Create and start the new animator
         _anim = new GeneralAnimator();

@@ -165,4 +165,12 @@ script = ExtResource("4_46l7y")
 _coneAngle = 45.0
 _sightDistance = 10.0
 
+[node name="HeadSight" type="Node3D" parent="SightPoint"]
+
+[node name="BodySight" type="Node3D" parent="SightPoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.595384, 0)
+
+[node name="FeetSight" type="Node3D" parent="SightPoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.27234, 0)
+
 [editable path="Character"]

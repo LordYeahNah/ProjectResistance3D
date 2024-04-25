@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d3op8kuajg1yq"]
+[gd_scene load_steps=16 format=3 uid="uid://d3op8kuajg1yq"]
 
 [ext_resource type="Script" path="res://Scripts/World/SceneController.cs" id="1_bwjum"]
 [ext_resource type="Texture2D" uid="uid://qruc0poge1rq" path="res://Textures/GridWhite.png" id="1_uvwl8"]
@@ -16,6 +16,17 @@ polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Arr
 albedo_texture = ExtResource("1_uvwl8")
 uv1_triplanar = true
 uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_d05yx"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_6dfm3"]
+albedo_color = Color(0.599197, 0.814176, 1, 1)
+albedo_texture = ExtResource("1_uvwl8")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ft3qt"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rsrio"]
 
@@ -43,6 +54,16 @@ surface_material_override/0 = SubResource("ORMMaterial3D_x0ofh")
 
 [node name="Node3D" type="Node3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.03798, 0, -8.73276)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 4.906, 0, 0, 0, 6.16788, 8.30383, 2.39651, -10.4626)
+mesh = SubResource("BoxMesh_d05yx")
+surface_material_override/0 = SubResource("ORMMaterial3D_6dfm3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/MeshInstance3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_ft3qt")
 
 [node name="CharacterBody3D" parent="." groups=["SoldierGroup"] instance=ExtResource("2_12ykx")]
 transform = Transform3D(1.00704, 0, 0, 0, 1.00704, 0, 0, 0, 1.00704, 10.2392, 0.07368, 3.96761)
@@ -74,7 +95,7 @@ _coneAngle = 90.0
 environment = SubResource("Environment_plhjg")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.266818, 0.963747, -4.03524e-07, 0.246201, 0.0681624, 0.966819, 0.931769, 0.257965, -0.255463, 0, 4.14236, 0)
+transform = Transform3D(-0.303338, 0.580667, -0.755521, -0.948192, -0.262512, 0.178939, -0.0944286, 0.770658, 0.630213, 0, 4.14236, 0)
 
 [node name="CameraController" parent="." instance=ExtResource("3_8dna5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2003, -4.76837e-07, 7.4794)

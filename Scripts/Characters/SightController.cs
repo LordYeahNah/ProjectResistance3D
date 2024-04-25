@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Godot;
 
 public partial class SightController : Node3D
@@ -30,7 +31,7 @@ public partial class SightController : Node3D
 
     protected void DetectSight()
     {
-        foreach(var enemy in Enemies)
+        foreach (var enemy in Enemies)
         {
             var toTarget = enemy.GlobalTransform.Origin - this.GlobalTransform.Origin;
             var forward = GlobalTransform.Basis.X;
@@ -40,13 +41,16 @@ public partial class SightController : Node3D
             float dot = toTarget.Dot(forward);
             float angle = Mathf.RadToDeg(Mathf.Cos(dot));
 
-            if(angle < _coneAngle / 2 && toTarget.Length() < _sightDistance)
+            if (angle < _coneAngle / 2 && toTarget.Length() < _sightDistance)
             {
-                if(!_currentEnemiesInSight.Contains(enemy))
+                if (CanSeeHead(enemy) || CanSeeBody(enemy) || CanSeeFeet(enemy))
                 {
-                    enemy.OnCharacterSeen(_owner);
-                    _currentEnemiesInSight.Add(enemy);
-                    CharacterSeenEvent?.Invoke(enemy);
+                    if (!_currentEnemiesInSight.Contains(enemy))
+                    {
+                        enemy.OnCharacterSeen(_owner);
+                        _currentEnemiesInSight.Add(enemy);
+                        CharacterSeenEvent?.Invoke(enemy);
+                    }
                 }
             } else
             {
@@ -58,5 +62,80 @@ public partial class SightController : Node3D
                 }
             }
         }
+    }
+
+    private bool CanSeeHead(CharacterController enemy)
+    {
+        var fromPos = _owner.Sight.GlobalTransform.Origin;
+        var toPos = enemy.HeadSight;
+
+        var spaceState = GetWorld3D().DirectSpaceState;
+        var rayParams = new PhysicsRayQueryParameters3D();
+        rayParams.From = fromPos;
+        rayParams.To = toPos;
+        rayParams.CollideWithBodies = true;
+        var result = spaceState.IntersectRay(rayParams);
+
+        if(result.Count > 0)
+        {
+            if (((GodotObject)result["collider"]) is CharacterBody3D body)
+            {
+                if (body is CharacterController)
+                    return true;
+            }
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool CanSeeBody(CharacterController enemy)
+    {
+        var fromPos = _owner.Sight.GlobalTransform.Origin;
+        var toPos = enemy.BodySight;
+
+        var spaceState = GetWorld3D().DirectSpaceState;
+        var rayParams = new PhysicsRayQueryParameters3D();
+        rayParams.From = fromPos;
+        rayParams.To = toPos;
+        rayParams.CollideWithBodies = true;
+        var result = spaceState.IntersectRay(rayParams);
+
+        if (result.Count > 0)
+        {
+            if (((GodotObject)result["collider"]) is CharacterBody3D body)
+            {
+                if (body is CharacterController)
+                    return true;
+            }
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool CanSeeFeet(CharacterController enemy)
+    {
+        var fromPos = _owner.Sight.GlobalTransform.Origin;
+        var toPos = enemy.FeetSight;
+
+        var spaceState = GetWorld3D().DirectSpaceState;
+        var rayParams = new PhysicsRayQueryParameters3D();
+        rayParams.From = fromPos;
+        rayParams.To = toPos;
+        rayParams.CollideWithBodies = true;
+        var result = spaceState.IntersectRay(rayParams);
+
+        if (result.Count > 0)
+        {
+            if (((GodotObject)result["collider"]) is CharacterBody3D body)
+            {
+                if (body is CharacterController)
+                    return true;
+            }
+            return true;
+        }
+
+        return false;
     }
 }
