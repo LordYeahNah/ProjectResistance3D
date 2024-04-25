@@ -136,6 +136,11 @@ public partial class CharacterController : CharacterBody3D
 
         FindRandomPathPointInWorld();                       // Finds a path point to follow
 
+        if(!string.IsNullOrEmpty(_spawnWithWeaponName))
+        {
+            SetWeapon(_spawnWithWeaponName, true);
+        }
+
         Callable.From(ActorSetup).CallDeferred();
     }
 
