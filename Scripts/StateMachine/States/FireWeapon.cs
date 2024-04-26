@@ -39,4 +39,14 @@ public class FireWeapon : State
             GD.Print("FireWeaponState -> Weapon controller reference isn't set");
         }
     }
+
+    public override void OnFinish()
+    {
+        if(_stateMachine != null)
+        {
+            _stateMachine.SetStateProperty<bool>("WillShoot", false);
+            _stateMachine.SetStateProperty<bool>("ShootNow", false);
+        }
+        base.OnFinish();
+    }
 }
