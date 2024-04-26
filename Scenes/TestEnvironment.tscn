@@ -28,14 +28,14 @@ uv1_world_triplanar = true
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ft3qt"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rsrio"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tk1ox"]
 
-[sub_resource type="Sky" id="Sky_3agig"]
-sky_material = SubResource("ProceduralSkyMaterial_rsrio")
+[sub_resource type="Sky" id="Sky_qto7t"]
+sky_material = SubResource("ProceduralSkyMaterial_tk1ox")
 
 [sub_resource type="Environment" id="Environment_plhjg"]
-background_mode = 3
-sky = SubResource("Sky_3agig")
+background_mode = 2
+sky = SubResource("Sky_qto7t")
 
 [sub_resource type="SphereMesh" id="SphereMesh_7p0jv"]
 
@@ -73,14 +73,13 @@ _rotationSpeed = 5.0
 [node name="Character_SportyMale_01" parent="CharacterBody3D/Character/Armature/Skeleton3D" index="12"]
 visible = true
 
-[node name="BoneAttachment3D" parent="CharacterBody3D/Character/Armature/Skeleton3D" index="21"]
-transform = Transform3D(-0.011192, 0.995286, 0.0963421, -0.803877, -0.0662584, 0.591095, 0.594688, -0.0708293, 0.800823, -24.9146, 24.5636, -99.9801)
-
 [node name="CharacterBody3D2" parent="." groups=["ResistanceCharacter"] instance=ExtResource("2_12ykx")]
 transform = Transform3D(1.00704, 0, 0, 0, 1.00704, 0, 0, 0, 1.00704, -10.8704, 0.07368, 5.60602)
 _generalMovementSpeed = 2.0
 _rotationSpeed = 5.0
 _followPathPoint = true
+_hasWeapon = true
+_spawnWithWeaponName = "Assault Rifle 01"
 
 [node name="Character_MilitaryMale_01" parent="CharacterBody3D2/Character/Armature/Skeleton3D" index="7"]
 visible = false
@@ -91,9 +90,6 @@ visible = true
 [node name="SM_Char_Attach_Male_Armor_03" parent="CharacterBody3D2/Character/Armature/Skeleton3D" index="20"]
 visible = false
 
-[node name="BoneAttachment3D" parent="CharacterBody3D2/Character/Armature/Skeleton3D" index="21"]
-transform = Transform3D(-0.011192, 0.995286, 0.0963421, -0.803877, -0.0662584, 0.591095, 0.594688, -0.0708293, 0.800823, -24.9146, 24.5636, -99.9801)
-
 [node name="SightPoint" parent="CharacterBody3D2" index="3"]
 _coneAngle = 90.0
 
@@ -101,7 +97,7 @@ _coneAngle = 90.0
 environment = SubResource("Environment_plhjg")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.303338, 0.580667, -0.755521, -0.948192, -0.262512, 0.178939, -0.0944286, 0.770658, 0.630213, 0, 4.14236, 0)
+transform = Transform3D(-0.957148, 0.103804, -0.270353, -0.27377, -0.628738, 0.727832, -0.0944287, 0.770658, 0.630214, 0, 4.14236, 0)
 
 [node name="CameraController" parent="." instance=ExtResource("3_8dna5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2003, -4.76837e-07, 7.4794)
@@ -139,9 +135,7 @@ skeleton = NodePath("../../Node3D")
 
 [editable path="CharacterBody3D"]
 [editable path="CharacterBody3D/Character"]
-[editable path="CharacterBody3D/Character/Armature/Skeleton3D/BoneAttachment3D/AR_01"]
 [editable path="CharacterBody3D2"]
 [editable path="CharacterBody3D2/Character"]
-[editable path="CharacterBody3D2/Character/Armature/Skeleton3D/BoneAttachment3D/AR_01"]
 [editable path="CameraController"]
 [editable path="PathPointController"]

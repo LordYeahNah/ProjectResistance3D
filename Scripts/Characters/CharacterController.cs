@@ -21,6 +21,12 @@ public partial class CharacterController : CharacterBody3D
     protected AnimationPlayer _animPlayer;
     public AnimationPlayer AnimPlayer => _animPlayer;
     protected Animator _anim;                   // Reference to the animator
+
+
+    // === Stats & Modifiers === //
+    protected CharacterStats _stats;
+    public CharacterStats Stats => _stats;
+
     
     
     // === Movement Properties === //
@@ -93,6 +99,7 @@ public partial class CharacterController : CharacterBody3D
     [Export] protected string _spawnWithWeaponName;
     protected WeaponController _assignedWeapon;
     protected BoneAttachment3D _weaponHandAttachment;
+    public WeaponController AssignedWeapon => _assignedWeapon;
     
 
     public override void _Ready()
@@ -128,6 +135,8 @@ public partial class CharacterController : CharacterBody3D
         _weaponHandAttachment = GetNode<BoneAttachment3D>("Character/Armature/Skeleton3D/BoneAttachment3D");
         if (_weaponHandAttachment == null)
             GD.PrintErr("CharacterController -> Failed to get reference to the weapon hand attachment");
+
+        _stats = new CharacterStats();                  // Create the character stats
         
 
         // Create and start the new animator
@@ -140,6 +149,8 @@ public partial class CharacterController : CharacterBody3D
         {
             SetWeapon(_spawnWithWeaponName, true);
         }
+
+
 
         Callable.From(ActorSetup).CallDeferred();
     }
@@ -300,9 +311,11 @@ public partial class CharacterController : CharacterBody3D
                 if(weaponInstance != null)
                 {
                     _weaponHandAttachment.AddChild(weaponInstance);
+
                     if (weaponInstance is WeaponController wpnCtrl)
                     {
                         wpnCtrl.Setup(weapon);
+                        wpnCtrl.Owner = this;
                         if(_anim != null)
                         {
                             switch(weapon.WeaponType)
