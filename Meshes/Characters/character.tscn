@@ -1,0 +1,76 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4rseers0vfwg"]
+
+[ext_resource type="PackedScene" uid="uid://kbkly7o0q7wt" path="res://Meshes/Character.glb" id="1_jkdy0"]
+[ext_resource type="Texture2D" uid="uid://cdgwynb85ge7w" path="res://Meshes/Characters/Textures/PolygonBattleRoyale_Texture_01_A.png" id="2_xbfhy"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_cs700"]
+albedo_texture = ExtResource("2_xbfhy")
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_5w5lj"]
+albedo_texture = ExtResource("2_xbfhy")
+
+[node name="Character" instance=ExtResource("1_jkdy0")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="Character_70sFemale_01" parent="Armature/Skeleton3D" index="0"]
+visible = false
+
+[node name="Character_BusinessMale_01" parent="Armature/Skeleton3D" index="1"]
+visible = false
+
+[node name="Character_GhillieSuit_01" parent="Armature/Skeleton3D" index="2"]
+visible = false
+
+[node name="Character_GothFemale_01" parent="Armature/Skeleton3D" index="3"]
+visible = false
+
+[node name="Character_MercenaryFemale_01" parent="Armature/Skeleton3D" index="4"]
+visible = false
+
+[node name="Character_MercenaryMale_01" parent="Armature/Skeleton3D" index="5"]
+surface_material_override/0 = SubResource("ORMMaterial3D_cs700")
+
+[node name="Character_MilitaryFemale_01" parent="Armature/Skeleton3D" index="6"]
+visible = false
+
+[node name="Character_MilitaryMale_01" parent="Armature/Skeleton3D" index="7"]
+visible = false
+
+[node name="Character_RedneckMale_01" parent="Armature/Skeleton3D" index="8"]
+visible = false
+
+[node name="Character_SportsBraFemale_01" parent="Armature/Skeleton3D" index="9"]
+visible = false
+
+[node name="Character_SportyFemale_01" parent="Armature/Skeleton3D" index="10"]
+visible = false
+
+[node name="Character_SportyFemale_02" parent="Armature/Skeleton3D" index="11"]
+visible = false
+
+[node name="Character_SportyMale_01" parent="Armature/Skeleton3D" index="12"]
+visible = false
+
+[node name="Character_SportyMale_02" parent="Armature/Skeleton3D" index="13"]
+visible = false
+
+[node name="Character_ToplessMale_01" parent="Armature/Skeleton3D" index="14"]
+visible = false
+
+[node name="SM_Char_Attach_Female_Armor_01" parent="Armature/Skeleton3D" index="15"]
+visible = false
+
+[node name="SM_Char_Attach_Female_Armor_02" parent="Armature/Skeleton3D" index="16"]
+visible = false
+
+[node name="SM_Char_Attach_Female_Armor_03" parent="Armature/Skeleton3D" index="17"]
+visible = false
+
+[node name="SM_Char_Attach_Male_Armor_01" parent="Armature/Skeleton3D" index="18"]
+visible = false
+
+[node name="SM_Char_Attach_Male_Armor_02" parent="Armature/Skeleton3D" index="19"]
+surface_material_override/0 = SubResource("ORMMaterial3D_5w5lj")
+
+[node name="SM_Char_Attach_Male_Armor_03" parent="Armature/Skeleton3D" index="20"]
+visible = false
