@@ -21,6 +21,8 @@ public class CombatSubState : SubStateMachine
         determineNextState.PotentialStates.Add(0.3f, findCoverState);
         determineNextState.PotentialStates.Add(0.7f, idleInCover);
 
+        shoot.NextState = determineNextState;
+
         var findCoverToMove = new StateTransition
         {
             _requiredProps = new List<StateProperty>
