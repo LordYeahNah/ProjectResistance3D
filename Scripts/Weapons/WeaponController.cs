@@ -96,6 +96,8 @@ public partial class WeaponController : Node3D
     public void ResetWeaponState()
     {
         _weaponState = EWeaponState.WPNSTATE_Idle;
+        if (CharacterOwner != null)
+            CharacterOwner.ResetAttack();
     }
 
     public bool CanFire()
