@@ -21,7 +21,12 @@ public class GuardStateMachine : StateMachine
         SetStateProperty("HasTarget", false, EPropertyType.PROP_Bool);
         SetStateProperty<Node3D>("Target", null, EPropertyType.PROP_Node2D);
         SetStateProperty<bool>("IsInCombat", false, EPropertyType.PROP_Bool);
-        
+        SetStateProperty<bool>("HasCoverPosition", false, EPropertyType.PROP_Bool);
+        SetStateProperty<bool>("IsAtCoverPosition", false, EPropertyType.PROP_Bool);
+        SetStateProperty<bool>("WillShoot", false, EPropertyType.PROP_Bool);
+        SetStateProperty<bool>("ShootNow", false, EPropertyType.PROP_Bool);
+
+
         // Setup the state machine
         SubStateMachine patrolSubState = new PartolSubState(this, false, false);
         EntryState = patrolSubState;
