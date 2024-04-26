@@ -338,6 +338,22 @@ public partial class CharacterController : CharacterBody3D
         }
     }
 
+    public CoverPointController FindNearestCoverPoint()
+    {
+        var points = GetTree().GetNodesInGroup("CoverPoints");
+
+        foreach(var point in points)
+        {
+            if(point is CoverPointController pointNode)
+            {
+                if (!pointNode.IsInUse)
+                    return pointNode;
+            }
+        }
+
+        return null;
+    }
+
     // === AI Sight Settings === //
 
     /// <summary>

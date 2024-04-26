@@ -20,6 +20,7 @@ public class GuardStateMachine : StateMachine
         SetStateProperty("HasReachedPathPoint", false, EPropertyType.PROP_Bool);
         SetStateProperty("HasTarget", false, EPropertyType.PROP_Bool);
         SetStateProperty<Node3D>("Target", null, EPropertyType.PROP_Node2D);
+        SetStateProperty<bool>("IsInCombat", false, EPropertyType.PROP_Bool);
         
         // Setup the state machine
         SubStateMachine patrolSubState = new PartolSubState(this, false, false);
@@ -31,7 +32,7 @@ public class GuardStateMachine : StateMachine
         {
             _requiredProps = new List<StateProperty>
             {
-                new StateValue<bool>("HasTarget", true, EPropertyType.PROP_Bool)
+                new StateValue<bool>("IsInCombat", true, EPropertyType.PROP_Bool)
             },
             NextState = combatState
         };

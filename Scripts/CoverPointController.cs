@@ -4,7 +4,9 @@ using Godot;
 public partial class CoverPointController : Node3D
 {
     private List<Vector3> _coverPoints = new List<Vector3>();                   // Store reference to the cover points
+    private CharacterController _usingCharacter = null;                         // Which character is currently using this point
 
+    public bool IsInUse => _usingCharacter != null;
     public override void _Ready()
     {
         base._Ready();
