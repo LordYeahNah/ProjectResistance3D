@@ -1,26 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://csx2j5nue1pgq"]
+[gd_scene load_steps=5 format=3 uid="uid://csx2j5nue1pgq"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/CharacterController.cs" id="1_ohvve"]
-[ext_resource type="PackedScene" uid="uid://kbkly7o0q7wt" path="res://Meshes/Character.glb" id="2_nn0ai"]
-[ext_resource type="Texture2D" uid="uid://cdgwynb85ge7w" path="res://Meshes/Characters/Textures/PolygonBattleRoyale_Texture_01_A.png" id="3_s41ar"]
+[ext_resource type="PackedScene" uid="uid://b4rseers0vfwg" path="res://Meshes/Characters/character.tscn" id="3_j4mna"]
 [ext_resource type="Script" path="res://Scripts/Characters/SightController.cs" id="4_46l7y"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dwjtx"]
-
-[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_7ckel"]
-albedo_texture = ExtResource("3_s41ar")
-
-[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_1j4pw"]
-albedo_texture = ExtResource("3_s41ar")
-
-[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_r10kx"]
-albedo_texture = ExtResource("3_s41ar")
-
-[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_plsu8"]
-albedo_texture = ExtResource("3_s41ar")
-
-[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_g3qgs"]
-albedo_texture = ExtResource("3_s41ar")
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_ohvve")
@@ -31,138 +15,6 @@ shape = SubResource("CapsuleShape3D_dwjtx")
 
 [node name="NavAgent" type="NavigationAgent3D" parent="."]
 path_height_offset = 0.25
-
-[node name="Character" parent="." instance=ExtResource("2_nn0ai")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
-
-[node name="Skeleton3D" parent="Character/Armature" index="0"]
-bones/0/position = Vector3(-9.56649, 1.8057, 11.2072)
-bones/0/rotation = Quaternion(-0.676804, -0.27362, 0.208065, 0.650982)
-bones/2/rotation = Quaternion(0.979796, 0.198989, 0.0195337, -0.00476124)
-bones/3/rotation = Quaternion(0.992897, -0.0407901, 0.0479188, -0.100974)
-bones/4/rotation = Quaternion(0.9646, 0.228352, -0.0549033, -0.119946)
-bones/5/rotation = Quaternion(-0.0313425, -0.0510424, 0.0155052, 0.998084)
-bones/6/position = Vector3(12.1646, 9.01279e-05, -4.7142e-06)
-bones/6/rotation = Quaternion(0.436824, 0.521444, -0.412872, 0.605655)
-bones/9/rotation = Quaternion(0.460654, 0.545309, -0.488263, 0.502032)
-bones/10/position = Vector3(13.1979, 5.44203e-05, -1.33783e-05)
-bones/10/rotation = Quaternion(-0.268063, -0.528893, -0.476156, 0.649377)
-bones/11/rotation = Quaternion(-0.640568, -0.329307, -0.509007, 0.471319)
-bones/12/rotation = Quaternion(-0.172378, -0.109638, 0.0981225, 0.97398)
-bones/13/position = Vector3(3.51404, -1.17073, 4.50557)
-bones/13/rotation = Quaternion(0.0493178, -0.0528966, -0.236704, 0.968886)
-bones/14/position = Vector3(6.37029, 1.65264e-05, -3.13051e-05)
-bones/14/rotation = Quaternion(-0.04033, 0.119345, -0.0290361, 0.991609)
-bones/15/position = Vector3(5.66549, -4.77189e-05, 5.09591e-06)
-bones/16/position = Vector3(10.3965, 0.398662, 2.67265)
-bones/16/rotation = Quaternion(0.0549579, 0.142493, -0.196901, 0.968455)
-bones/17/position = Vector3(4.09357, 4.65571e-05, 2.53047e-05)
-bones/17/rotation = Quaternion(-0.00112391, 0.00318193, -0.246917, 0.969031)
-bones/18/rotation = Quaternion(-0.00670961, 0.00519502, -0.247667, 0.968808)
-bones/19/position = Vector3(3.77976, 1.20719e-05, 4.18057e-06)
-bones/19/rotation = Quaternion(-0.00451969, 0.0280399, 0.159067, 0.986859)
-bones/20/position = Vector3(9.98259, -0.115986, -3.28334)
-bones/20/rotation = Quaternion(0.0655757, 0.138002, -0.197341, 0.968355)
-bones/21/position = Vector3(4.24871, 9.37259e-05, -6.83838e-06)
-bones/21/rotation = Quaternion(0.00242974, -0.000308409, -0.39018, 0.920735)
-bones/22/position = Vector3(3.51332, -8.70481e-05, 5.73651e-05)
-bones/22/rotation = Quaternion(-0.0169457, 0.00555719, -0.374232, 0.927164)
-bones/23/position = Vector3(3.00328, 4.2881e-05, -4.88426e-05)
-bones/24/rotation = Quaternion(0.651738, -0.599976, -0.341895, -0.313646)
-bones/25/position = Vector3(-13.1979, 0.000584148, -1.60205e-05)
-bones/25/rotation = Quaternion(0.147442, -0.57028, -0.335279, 0.735275)
-bones/26/rotation = Quaternion(-0.204343, -0.851835, -0.0875909, 0.474287)
-bones/27/rotation = Quaternion(0.101259, -0.147501, 0.0764291, 0.980892)
-bones/28/rotation = Quaternion(0.0254807, -0.276842, -0.0880391, 0.956535)
-bones/29/position = Vector3(-6.37021, -0.00079671, 7.18036e-05)
-bones/29/rotation = Quaternion(-0.0399418, 0.11784, -0.141636, 0.982068)
-bones/30/position = Vector3(-5.66543, 8.0728e-05, -9.65912e-06)
-bones/30/rotation = Quaternion(-0.0364033, 0.152034, 0.229995, 0.960553)
-bones/31/rotation = Quaternion(0.00028049, -0.065798, -0.0042538, 0.997824)
-bones/34/position = Vector3(-3.77931, -0.000559908, -1.31045e-05)
-bones/34/rotation = Quaternion(-0.00451967, 0.0280399, 0.159067, 0.986859)
-bones/35/rotation = Quaternion(-0.00248643, 0.0438787, -0.0565193, 0.997434)
-bones/36/position = Vector3(-4.24872, -4.30296e-05, 1.64543e-05)
-bones/37/position = Vector3(-3.51331, 8.83051e-05, -3.38211e-05)
-bones/39/rotation = Quaternion(0.0779114, 0.674648, -0.706839, -0.197885)
-bones/40/rotation = Quaternion(0.520734, -0.392133, 0.333692, 0.680968)
-bones/41/rotation = Quaternion(0.736423, -0.670059, -0.0910615, -0.0202488)
-bones/42/rotation = Quaternion(0.006059, 0.0100216, 0.279396, 0.960105)
-bones/44/rotation = Quaternion(-0.510599, 0.23167, 0.015457, 0.827876)
-bones/45/rotation = Quaternion(0.448336, -0.564219, 0.422157, 0.549941)
-bones/46/rotation = Quaternion(0.760916, -0.644512, -0.0418097, -0.0621509)
-bones/47/rotation = Quaternion(0.00447821, -6.71232e-05, 0.255496, 0.9668)
-
-[node name="Character_70sFemale_01" parent="Character/Armature/Skeleton3D" index="0"]
-visible = false
-surface_material_override/0 = SubResource("ORMMaterial3D_7ckel")
-
-[node name="Character_BusinessMale_01" parent="Character/Armature/Skeleton3D" index="1"]
-visible = false
-
-[node name="Character_GhillieSuit_01" parent="Character/Armature/Skeleton3D" index="2"]
-visible = false
-
-[node name="Character_GothFemale_01" parent="Character/Armature/Skeleton3D" index="3"]
-visible = false
-
-[node name="Character_MercenaryFemale_01" parent="Character/Armature/Skeleton3D" index="4"]
-visible = false
-
-[node name="Character_MercenaryMale_01" parent="Character/Armature/Skeleton3D" index="5"]
-visible = false
-
-[node name="Character_MilitaryFemale_01" parent="Character/Armature/Skeleton3D" index="6"]
-visible = false
-
-[node name="Character_MilitaryMale_01" parent="Character/Armature/Skeleton3D" index="7"]
-surface_material_override/0 = SubResource("ORMMaterial3D_1j4pw")
-
-[node name="Character_RedneckMale_01" parent="Character/Armature/Skeleton3D" index="8"]
-visible = false
-surface_material_override/0 = SubResource("ORMMaterial3D_r10kx")
-
-[node name="Character_SportsBraFemale_01" parent="Character/Armature/Skeleton3D" index="9"]
-visible = false
-
-[node name="Character_SportyFemale_01" parent="Character/Armature/Skeleton3D" index="10"]
-visible = false
-
-[node name="Character_SportyFemale_02" parent="Character/Armature/Skeleton3D" index="11"]
-visible = false
-
-[node name="Character_SportyMale_01" parent="Character/Armature/Skeleton3D" index="12"]
-visible = false
-surface_material_override/0 = SubResource("ORMMaterial3D_plsu8")
-
-[node name="Character_SportyMale_02" parent="Character/Armature/Skeleton3D" index="13"]
-visible = false
-
-[node name="Character_ToplessMale_01" parent="Character/Armature/Skeleton3D" index="14"]
-visible = false
-
-[node name="SM_Char_Attach_Female_Armor_01" parent="Character/Armature/Skeleton3D" index="15"]
-visible = false
-
-[node name="SM_Char_Attach_Female_Armor_02" parent="Character/Armature/Skeleton3D" index="16"]
-visible = false
-
-[node name="SM_Char_Attach_Female_Armor_03" parent="Character/Armature/Skeleton3D" index="17"]
-visible = false
-
-[node name="SM_Char_Attach_Male_Armor_01" parent="Character/Armature/Skeleton3D" index="18"]
-visible = false
-
-[node name="SM_Char_Attach_Male_Armor_02" parent="Character/Armature/Skeleton3D" index="19"]
-visible = false
-
-[node name="SM_Char_Attach_Male_Armor_03" parent="Character/Armature/Skeleton3D" index="20"]
-surface_material_override/0 = SubResource("ORMMaterial3D_g3qgs")
-
-[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Character/Armature/Skeleton3D" index="21"]
-transform = Transform3D(-0.011192, 0.995286, 0.0963421, -0.803877, -0.0662584, 0.591095, 0.594688, -0.0708293, 0.800823, -24.9146, 24.5636, -99.9801)
-bone_name = "Hand_R"
-bone_idx = 27
 
 [node name="SightPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.353284, 1.42326, 0)
@@ -177,5 +29,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.595384, 0)
 
 [node name="FeetSight" type="Node3D" parent="SightPoint"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.27234, 0)
+
+[node name="Character" parent="." instance=ExtResource("3_j4mna")]
 
 [editable path="Character"]
