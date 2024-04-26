@@ -46,7 +46,7 @@ public partial class CoverPointController : Node3D
         return closesPoint;
     }
 
-    public Vector3 GetEndPoint(Vector3 currentPos, Vector3 targetPos)
+    public Vector3 GetEndPoint(Vector3 currentPos)
     {
         float distanceOne = currentPos.DistanceTo(_coverPoints[0]);
         float distanceTwo = currentPos.DistanceTo(_coverPoints[_coverPoints.Count - 1]);
