@@ -13,6 +13,17 @@ public class FindCover : State
     {
     }
 
+    public override void OnEnter()
+    {
+        base.OnEnter();
+
+        if(_stateMachine != null)
+        {
+            _stateMachine.SetStateProperty(StateMachineKeys.IS_AT_COVER_POSITION, false);
+            _stateMachine.SetStateProperty(StateMachineKeys.HAS_COVER_POSITION, false);
+        }
+    }
+
     public override void OnUpdate(float dt)
     {
         base.OnUpdate(dt);
@@ -22,8 +33,9 @@ public class FindCover : State
             var coverPointCtrl = _stateMachine.Ctrl.FindNearestCoverPoint();
             if(coverPointCtrl != null)
             {
-                _stateMachine.SetStateProperty<Vector3>("MoveToLocation", coverPointCtrl.GetClosesCoverPointToSelf(_stateMachine.Ctrl.GlobalPosition));
-                _stateMachine.SetStateProperty<bool>("HasMoveToLocation", true);
+                _stateMachine.SetStateProperty<Vector3>(StateMachineKeys.MOVE_TO_LOCATION, coverPointCtrl.GetClosesCoverPointToSelf(_stateMachine.Ctrl.GlobalPosition));
+                _stateMachine.SetStateProperty<bool>(StateMachineKeys.HAS_MOVE_TO_LOCATION, true);
+                _stateMachine.SetStateProperty<bool>(StateMachineKeys.HAS_COVER_POSITION, true);
 
                 OnFinish();
             }
