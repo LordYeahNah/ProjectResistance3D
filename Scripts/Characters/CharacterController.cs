@@ -218,6 +218,12 @@ public partial class CharacterController : CharacterBody3D
             _anim.SetStateProperty(GeneralAnimKeys.IS_MOVING, _hasMoveToLocation);
     }
 
+    public void SetInCover(bool isInCover)
+    {
+        if (_anim != null)
+            _anim.SetStateProperty<bool>(GeneralAnimKeys.IS_IN_COVER, isInCover);
+    }
+
     public async void ActorSetup()
     {
         await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);

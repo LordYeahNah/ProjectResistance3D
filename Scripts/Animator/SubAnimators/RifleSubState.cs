@@ -57,11 +57,31 @@ public class RifleSubState : AnimatorSubState
             },
             NextState = coverIdle
         };
+
+        var coverToEmergeLeft = new StateTransition
+        {
+            _requiredProps = new List<StateProperty>
+            {
+                new StateValue<bool>(GeneralAnimKeys.IS_IN_COVER, true, EPropertyType.PROP_Bool),
+                new StateValue<bool>(GeneralAnimKeys.WILL_SHOOT, true, EPropertyType.PROP_Bool)
+            },
+        };
+
+        var coverToEmergeRight = new StateTransition
+        {
+            _requiredProps = new List<StateProperty>
+            {
+                new StateValue<bool>(GeneralAnimKeys.IS_IN_COVER, true, EPropertyType.PROP_Bool),
+                new StateValue<bool>(GeneralAnimKeys.WILL_SHOOT, true, EPropertyType.PROP_Bool),
+            }
+        }
         
         idle.Transitions.Add(idleToWalk);
         idle.Transitions.Add(idleToCover);
         walk.Transitions.Add(walkToIdle);
         walk.Transitions.Add(walkToCover);
+        coverIdle.Transitions.Add(coverToEmergeLeft);
+        coverIdle.Transitions.Add(coverToEmergeRight);
         
         EntryState = idle;
         Animations.Add(idle);
