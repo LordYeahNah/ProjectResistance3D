@@ -13,18 +13,18 @@ public class GuardStateMachine : StateMachine
     {
         
         // Create the properties
-        SetStateProperty("MoveToLocation", Vector3.Zero, EPropertyType.PROP_Vector3);
-        SetStateProperty("HasMoveToLocation", false, EPropertyType.PROP_Bool);
-        SetStateProperty("WaitAtPathEnd", true, EPropertyType.PROP_Bool);
-        SetStateProperty("IsAtPathEnd", false, EPropertyType.PROP_Bool);
-        SetStateProperty("HasReachedPathPoint", false, EPropertyType.PROP_Bool);
-        SetStateProperty("HasTarget", false, EPropertyType.PROP_Bool);
-        SetStateProperty<Node3D>("Target", null, EPropertyType.PROP_Node2D);
-        SetStateProperty<bool>("IsInCombat", false, EPropertyType.PROP_Bool);
-        SetStateProperty<bool>("HasCoverPosition", false, EPropertyType.PROP_Bool);
-        SetStateProperty<bool>("IsAtCoverPosition", false, EPropertyType.PROP_Bool);
-        SetStateProperty<bool>("WillShoot", false, EPropertyType.PROP_Bool);
-        SetStateProperty<bool>("ShootNow", false, EPropertyType.PROP_Bool);
+        SetStateProperty(StateMachineKeys.MOVE_TO_LOCATION, Vector3.Zero, EPropertyType.PROP_Vector3);
+        SetStateProperty(StateMachineKeys.HAS_REACHED_PATH_POINT, false, EPropertyType.PROP_Bool);
+        SetStateProperty(StateMachineKeys.WAIT_AT_END_OF_PATH, true, EPropertyType.PROP_Bool);
+        SetStateProperty(StateMachineKeys.IS_AT_PATH_END, false, EPropertyType.PROP_Bool);
+        SetStateProperty(StateMachineKeys.HAS_REACHED_PATH_POINT, false, EPropertyType.PROP_Bool);
+        SetStateProperty(StateMachineKeys.HAS_TARGET, false, EPropertyType.PROP_Bool);
+        SetStateProperty<Node3D>(StateMachineKeys.TARGET, null, EPropertyType.PROP_Node2D);
+        SetStateProperty<bool>(StateMachineKeys.IS_IN_COMBAT, false, EPropertyType.PROP_Bool);
+        SetStateProperty<bool>(StateMachineKeys.HAS_COVER_POSITION, false, EPropertyType.PROP_Bool);
+        SetStateProperty<bool>(StateMachineKeys.IS_AT_COVER_POSITION, false, EPropertyType.PROP_Bool);
+        SetStateProperty<bool>(StateMachineKeys.WILL_SHOOT, false, EPropertyType.PROP_Bool);
+        SetStateProperty<bool>(StateMachineKeys.SHOOT_NOW, false, EPropertyType.PROP_Bool);
 
 
         // Setup the state machine
@@ -37,7 +37,7 @@ public class GuardStateMachine : StateMachine
         {
             _requiredProps = new List<StateProperty>
             {
-                new StateValue<bool>("IsInCombat", true, EPropertyType.PROP_Bool)
+                new StateValue<bool>(StateMachineKeys.IS_IN_COMBAT, true, EPropertyType.PROP_Bool)
             },
             NextState = combatState
         };
@@ -47,7 +47,7 @@ public class GuardStateMachine : StateMachine
         {
             _requiredProps = new List<StateProperty>
             {
-                new StateValue<bool>("HasTarget", false, EPropertyType.PROP_Bool)
+                new StateValue<bool>(StateMachineKeys.HAS_TARGET, false, EPropertyType.PROP_Bool)
             },
             NextState = patrolSubState
         };
