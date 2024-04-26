@@ -354,6 +354,14 @@ public partial class CharacterController : CharacterBody3D
         return null;
     }
 
+    public bool CanFire()
+    {
+        if (_assignedWeapon != null && _assignedWeapon.CanFire())
+            return true;
+
+        return false;
+    }
+
     // === AI Sight Settings === //
 
     /// <summary>
