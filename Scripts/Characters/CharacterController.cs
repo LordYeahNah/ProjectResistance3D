@@ -338,6 +338,20 @@ public partial class CharacterController : CharacterBody3D
         }
     }
 
+    public void TriggerWillShoot(CharacterController target)
+    {
+        if (target == null) return;
+
+        if (_anim != null)
+            _anim.SetStateProperty(GeneralAnimKeys.IS_SHOOTING, true);
+    }
+
+    public void ResetAttack()
+    {
+        if (_anim != null)
+            _anim.SetStateProperty(GeneralAnimKeys.IS_SHOOTING, false);
+    }
+
     public CoverPointController FindNearestCoverPoint()
     {
         var points = GetTree().GetNodesInGroup("CoverPoints");
