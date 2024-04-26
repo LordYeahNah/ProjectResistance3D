@@ -19,3 +19,12 @@ mono_crash.*.json
 /.vs
 /.vs
 *.vsidx
+Scripts/.VSCodeCounter/2024-04-24_10-20-28/results.txt
+Scripts/.VSCodeCounter/2024-04-24_10-20-28/results.md
+Scripts/.VSCodeCounter/2024-04-24_10-20-28/results.json
+Scripts/.VSCodeCounter/2024-04-24_10-20-28/results.csv
+Scripts/.VSCodeCounter/2024-04-24_10-20-28/diff.txt
+Scripts/.VSCodeCounter/2024-04-24_10-20-28/diff.md
+Scripts/.VSCodeCounter/2024-04-24_10-20-28/diff.csv
+Scripts/.VSCodeCounter/2024-04-24_10-20-28/diff-details.md
+Scripts/.VSCodeCounter/2024-04-24_10-20-28/details.md
