@@ -28,13 +28,17 @@ public class WantsToShootUpdater : StateUpdater
     {
         base.OnUpdate(dt);
 
-        if(_ctrlRef != null && _ctrlRef.CanFire())
+        CharacterController target = (CharacterController)_stateMachine.GetStateProperty<Node3D>(StateMachineKeys.TARGET);
+
+        if(target != null &&_ctrlRef != null && _ctrlRef.CanFire())
         {
             _rand.Randomize();
             bool willShoot = _rand.Randf() < CHANCE_TO_SHOOT_TIME;
             if (willShoot)
             {
+               
                 _stateMachine.SetStateProperty<bool>("WillShoot", true);
+                _ctrlRef.TriggerWillShoot(target);
             }
         }
     }
