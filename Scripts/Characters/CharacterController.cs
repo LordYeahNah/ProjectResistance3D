@@ -62,6 +62,30 @@ public partial class CharacterController : CharacterBody3D
     public Vector3 HeadSight => _headSight.GlobalPosition;
     public Vector3 BodySight => _bodySight.GlobalPosition;
     public Vector3 FeetSight => _feetSight.GlobalPosition;
+
+    // === Cover Properties === //
+    private bool _isInCover;
+    public bool IsInCover => _isInCover;
+    private CoverPointInfo _currentCoverPointInfo;
+    public CoverPointInfo CurrentCoverPointInfo
+    {
+        get => _currentCoverPointInfo;
+        set
+        {
+            if(value == null)
+            {
+                if (_anim != null)
+                    _anim.SetStateProperty(GeneralAnimKeys.EMERGE_DIRECTION, 0);
+            } else
+            {
+                if (_anim != null)
+                    _anim.SetStateProperty(GeneralAnimKeys.EMERGE_DIRECTION, (int)value.EmergeDirection);
+
+            }
+
+            _currentCoverPointInfo = value;
+        }
+    }
     
     // === Follow Path Settings === //
     [ExportGroup("Follow Path Settings")]
@@ -221,7 +245,12 @@ public partial class CharacterController : CharacterBody3D
     public void SetInCover(bool isInCover)
     {
         if (_anim != null)
+        {
+            _isInCover = true;
             _anim.SetStateProperty<bool>(GeneralAnimKeys.IS_IN_COVER, isInCover);
+            int emergeDir = isInCover ? (int)CurrentCoverPointInfo.EmergeDirection : 0;
+            _anim.SetStateProperty<int>(GeneralAnimKeys.EMERGE_DIRECTION, emergeDir);
+        }
     }
 
     public async void ActorSetup()

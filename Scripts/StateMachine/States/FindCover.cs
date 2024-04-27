@@ -33,7 +33,23 @@ public class FindCover : State
             var coverPointCtrl = _stateMachine.Ctrl.FindNearestCoverPoint();
             if(coverPointCtrl != null)
             {
-                _stateMachine.SetStateProperty<Vector3>(StateMachineKeys.MOVE_TO_LOCATION, coverPointCtrl.GetEndPoint(_stateMachine.Ctrl.GlobalPosition));
+                CoverPointInfo coverPointInfo;
+                switch(coverPointCtrl.CoverType)
+                {
+                    case ECoverType.COVER_Side:
+                        coverPointInfo = coverPointCtrl.GetEndPoint(_stateMachine.Ctrl.GlobalPosition);
+                        break;
+                    case ECoverType.COVER_Top:
+                        coverPointInfo = coverPointCtrl.GetClosesCoverPointToSelf(_stateMachine.Ctrl.GlobalPosition);
+                        break;
+                    default:
+                        coverPointInfo = coverPointCtrl.GetEndPoint(_stateMachine.Ctrl.GlobalPosition);
+                        break;
+                }
+
+                _stateMachine.Ctrl.CurrentCoverPointInfo = coverPointInfo;
+
+                _stateMachine.SetStateProperty<Vector3>(StateMachineKeys.MOVE_TO_LOCATION, coverPointInfo.GlobalPosition);
                 _stateMachine.SetStateProperty<bool>(StateMachineKeys.HAS_MOVE_TO_LOCATION, true);
                 _stateMachine.SetStateProperty<bool>(StateMachineKeys.HAS_COVER_POSITION, true);
 

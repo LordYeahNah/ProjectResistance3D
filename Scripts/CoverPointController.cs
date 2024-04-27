@@ -1,10 +1,18 @@
 ﻿using System.Collections.Generic;
 using Godot;
 
+public enum ECoverType
+{
+    COVER_None = 0,
+    COVER_Side = 1,
+    COVER_Top = 2
+}
+
 public partial class CoverPointController : Node3D
 {
-    private List<Vector3> _coverPoints = new List<Vector3>();                   // Store reference to the cover points
+    private List<CoverPointInfo> _coverPoints = new List<CoverPointInfo>();                   // Store reference to the cover points
     private CharacterController _usingCharacter = null;                         // Which character is currently using this point
+    [Export] public ECoverType CoverType;
 
     public bool IsInUse => _usingCharacter != null;
     public override void _Ready()
@@ -12,44 +20,44 @@ public partial class CoverPointController : Node3D
         base._Ready();
         var points = GetChildren();
         foreach (var point in points)
-            if (point is Node3D node)
-                _coverPoints.Add(node.GlobalPosition);
+            if (point is CoverPointInfo node)
+                _coverPoints.Add(node);
     }
 
-    public Vector3 GetClosesCoverPointToSelf(Vector3 currentPos)
+    public CoverPointInfo GetClosesCoverPointToSelf(Vector3 currentPos)
     {
-        Vector3 closesPoint;
+        CoverPointInfo closesPoint;
         closesPoint = _coverPoints[0];
 
         foreach(var point in _coverPoints)
         {
-            var distance = currentPos.DistanceTo(point);
-            if (distance < currentPos.DistanceTo(closesPoint))
+            var distance = currentPos.DistanceTo(point.GlobalPosition);
+            if (distance < currentPos.DistanceTo(closesPoint.GlobalPosition))
                 closesPoint = point;
         }
 
         return closesPoint;
     }
 
-    public Vector3 GetClosesCoverPointToTarget(Vector3 currentPos, Vector3 targetPos)
+    public CoverPointInfo GetClosesCoverPointToTarget(Vector3 currentPos, Vector3 targetPos)
     {
-        Vector3 closesPoint;
+        CoverPointInfo closesPoint;
         closesPoint = _coverPoints[0];
 
         foreach(var point in _coverPoints)
         {
-            var distance = targetPos.DistanceTo(point);
-            if (distance < targetPos.DistanceTo(closesPoint))
+            var distance = targetPos.DistanceTo(point.GlobalPosition);
+            if (distance < targetPos.DistanceTo(closesPoint.GlobalPosition))
                 closesPoint = point;
         }
 
         return closesPoint;
     }
 
-    public Vector3 GetEndPoint(Vector3 currentPos)
+    public CoverPointInfo GetEndPoint(Vector3 currentPos)
     {
-        float distanceOne = currentPos.DistanceTo(_coverPoints[0]);
-        float distanceTwo = currentPos.DistanceTo(_coverPoints[_coverPoints.Count - 1]);
+        float distanceOne = currentPos.DistanceTo(_coverPoints[0].GlobalPosition);
+        float distanceTwo = currentPos.DistanceTo(_coverPoints[_coverPoints.Count - 1].GlobalPosition);
 
         return distanceOne < distanceTwo ? _coverPoints[0] : _coverPoints[_coverPoints.Count - 1];
     }

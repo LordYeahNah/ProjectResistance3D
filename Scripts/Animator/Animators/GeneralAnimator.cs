@@ -18,6 +18,7 @@ public class GeneralAnimator : Animator
         SetStateProperty(GeneralAnimKeys.IS_IN_COVER, false, EPropertyType.PROP_Bool);
         SetStateProperty(GeneralAnimKeys.WILL_SHOOT, false, EPropertyType.PROP_Bool);
         SetStateProperty(GeneralAnimKeys.SHOOT, false, EPropertyType.PROP_Bool);
+        SetStateProperty(GeneralAnimKeys.EMERGE_DIRECTION, 0, EPropertyType.PROP_Int);
 
         var unarmed = new UnarmedSubAnim(this, false, true);
         var rifle = new RifleSubState(this, false, true);

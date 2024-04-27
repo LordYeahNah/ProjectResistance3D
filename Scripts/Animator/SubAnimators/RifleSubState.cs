@@ -63,7 +63,8 @@ public class RifleSubState : AnimatorSubState
             _requiredProps = new List<StateProperty>
             {
                 new StateValue<bool>(GeneralAnimKeys.IS_IN_COVER, true, EPropertyType.PROP_Bool),
-                new StateValue<bool>(GeneralAnimKeys.WILL_SHOOT, true, EPropertyType.PROP_Bool)
+                new StateValue<bool>(GeneralAnimKeys.WILL_SHOOT, true, EPropertyType.PROP_Bool),
+                new StateValue<int>(GeneralAnimKeys.EMERGE_DIRECTION, (int)EEmergeType.EMERGE_Left, EPropertyType.PROP_Int),
             },
         };
 
@@ -73,6 +74,7 @@ public class RifleSubState : AnimatorSubState
             {
                 new StateValue<bool>(GeneralAnimKeys.IS_IN_COVER, true, EPropertyType.PROP_Bool),
                 new StateValue<bool>(GeneralAnimKeys.WILL_SHOOT, true, EPropertyType.PROP_Bool),
+                new StateValue<int>(GeneralAnimKeys.EMERGE_DIRECTION, (int)EEmergeType.EMERGE_Right, EPropertyType.PROP_Int)
             }
         }
         
